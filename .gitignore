@@ -44,3 +44,6 @@ Backup/
 # Other
 /Properties
 UpgradeLog.htm
+
+# Exclude UnityProject, it has its own .gitignore
+!/Assets/UnityProject/
