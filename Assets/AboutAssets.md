@@ -142,6 +142,18 @@ Asset bundles are a way for us to basically transfer our enemy from our Unity pr
 
 ### Our Toilet Leech assets in Unity
 
+We have made a ToiletLeech folder in our Unity project. Everything that goes into our asset bundle is in there.
+The first thing we did was import our fbx model into Unity. It contains all the materials, textures and animations of our model when first imported, but it is good to separate some of that stuff into their own folders. We have extracted our materials into the `Materials` folder.
+
+We have also copied the individual animations into the `Animations` folder, because I don't know how to separate them properly, but we can just ignore the animations embedded in the fbx file and use the copies inside the `Animations` folder anyways.
+
+And at this point of writing this, I realised we have two, probably identical versions of the fbx model in the project, one in the `Models` folder, and one directly in `ToiletLeech`, which is basically our root folder. We are meant to only have the one in `Models` and use that, **but I will fix that later. Also note to self: remove the music.cs file too. It does nothing.** At least, it should.
+
+Anyways, how do we make the game see our assets as an enemy? Well, we create a new Scriptable Object of type EnemyType. This is what the game uses, so we need it too. Do note that these thingies come from the Lethal Company Unity Template this is based off of. Do also note that our UnityProject in this repository is already configured properly *(for other than the missing stuff, like right click showing enemy name and enemy info page getting added to terminal. It will be added when I have time to do so)*.  
+![Screenshot: Create object Enemy Type](./ForTutorial/CreateObjectEnemyType.png)
+
+The EnemyType thingy has some configuration options, and the most important thing is the "Enemy Prefab" part of it. This is where we tell it what the model and whatever stuff our EnemyType has. Also note the "Enemy Name" thingy, this will be the name of the ToiletLeech enemy in the coding side of things.
+
 // TODO: write the rest
 
 ### Adding things to an asset bundle
