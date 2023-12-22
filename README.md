@@ -12,10 +12,10 @@ This is the GitHub repository where the source code of this mod is hosted. **Mod
 NOTE: Contributions are welcome! This will help new modders get started with making custom enemies, so it would be super awesome if you contributed your knowledge and shared some useful resources! Feel free to open an issue or ping me on discord under the toilet leech post or DM me! This resource could possibly find its way to the Lethal Company Modding Wiki.
 
 - [ ] Blender resources
-    - [ ] modeling
-    - [ ] rigging
-    - [ ] animation
-        - [ ] Add multiple individual animations using Nonlinear Animation Editor (NLA Editor)
+    - [x] Basics
+    - [ ] Modeling
+    - [x] Rigging
+    - [x] Animation
     - [ ] How to export model for Unity
     - [ ] Common issues and how to fix them
 - [ ] Unity resources

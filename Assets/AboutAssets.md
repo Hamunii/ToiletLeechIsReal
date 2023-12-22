@@ -18,7 +18,7 @@ All of the software used in this process are available on both Windows and Linux
 Blender is the free and open source 3D creation suite. It supports the entirety of the 3D pipeline—modeling, rigging, animation, simulation, rendering, compositing and motion tracking, even video editing and game creation.
 
 Blender is an amazing program and it can do everything you want when making your 3D model. Files that end with .blend or .blend1 (a backup) are blender projects. While you work with these files, you need to export your model as fbx when importing it to Unity. However, in order to model, rig and animate your models, you need to learn blender first.  
-You can install Blender from https://www.blender.org/download/, or if you are on Linux, I recommend installing the [Flatpak](https://flathub.org/apps/org.blender.Blender).
+You can install Blender from https://www.blender.org/download/, or if you are on Linux, I recommend installing the [Flatpak](https://flathub.org/apps/org.blender.Blender) package.
 
 Here are some resources to get started with Blender:
 
@@ -33,13 +33,20 @@ If you have absolutely no experience about Blender, the 4 first parts of this se
 - [Part 3: Modelling the Icing](https://youtu.be/AqJx5TJyhes?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z&t=42) - introduces more advanced modeling techniques
 - [Part 4: Sculpting](https://youtu.be/--GVNZnSROc?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Sculpting can be especially useful when modeling organic things
 
-
 ### Modeling
 
 - [Fast Character Modeling with the Skin Modifier in Blender](https://youtu.be/DAAwy_l4jw4) - Joey Carlino
-    - Introduces a super cool and easy modeling technique. I recommend this a lot for making a basic initial mesh for characters.
+    - Introduces a super cool and easy modeling technique. I recommend this a lot for making basic initial meshes for characters.
 
 // TODO: add more resources
+
+### Modeling - Common issues
+
+**My mesh looks inverted in Blender or when imported to Unity.**  
+This is because your normals are inverted in a way or another. Select your mesh in Edit Mode, press A to select everything, press Shift+N to recalculate normals (do not select "Inside", it is the flipped state).  
+If this doesn't fix it when importing to Unity, you likely have resized your object by a negative amount. This looks normal in Blender, but not in Unity. To fix this, go into Object Mode, select your object, press Ctrl+A, select apply scale. Now your normals should have flipped in Blender. Now, recalculate normals.
+
+// TODO: add more stuff
 
 ### Rigging
 
@@ -49,8 +56,6 @@ If you have absolutely no experience about Blender, the 4 first parts of this se
     - A lot of useful stuff about rigging. Very fast paced, so maybe better to watch after a more introductory tutorial.
 - [How to Rig and Animate in BLENDER!](https://youtu.be/1khSuB6sER0) - ProductionCrate
     - Making a rig for a humanoid character, fixing issues with Blender's automatic weights feature, inverse kinematics. 
-- [Character animation for impatient people - Blender Tutorial](https://youtu.be/GAIZkIfXXjQ) - Joey Carlino
-    - If you don't want to make and rig your own models.
 
 // TODO: add more resources
 
@@ -64,6 +69,8 @@ If you have absolutely no experience about Blender, the 4 first parts of this se
     - A more in-depth video about the NLA Editor. Do note though, we do not need to do anything complex with the NLA Editor.
 - [Become a PRO at Animation in 25 Minutes | Blender Tutorial](https://youtu.be/_C2ClFO3FAY) - CG Geek
     - Animating a walk cycle. Uses Timeline, Dope Sheet and Graph Editor. Uses references for animation.
+- [Character animation for impatient people - Blender Tutorial](https://youtu.be/GAIZkIfXXjQ) - Joey Carlino
+    - If you don't want to make and rig your own models.
 
 // TODO: add more resources
 
