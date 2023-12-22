@@ -48,6 +48,12 @@ If this doesn't fix it when importing to Unity, you likely have resized your obj
 
 // TODO: add more stuff
 
+### Materials & Texturing, UV Unwrapping
+
+**Note:** Unity does not understand Blender's shader node system. If you use it for other than the princibled BSDF, you need to bake your material as a texture for it to work in Unity. Do also note that Lethal Company adds its style to everything, so you don't need to worry about that. However, textures are not necessary so you can basically skip this section entirely.
+
+// TODO: add resources
+
 ### Rigging
 
 - [Tutorial: My New Rigging Workflow in Blender](https://youtu.be/BiPoPMnU2VI) - Polyfjord

@@ -14,6 +14,7 @@ NOTE: Contributions are welcome! This will help new modders get started with mak
 - [ ] Blender resources
     - [x] Basics
     - [ ] Modeling
+    - [ ] Materials & texturing, UV Unwrapping
     - [x] Rigging
     - [x] Animation
     - [ ] How to export model for Unity
