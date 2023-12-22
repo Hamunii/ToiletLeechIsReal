@@ -1,10 +1,11 @@
 # About Assets
 
-Here you will find information regarding our assets and how to work with them.
+The goal of this resource and project is to be a reference implementation and documentation on custom enemies.
+While this is still very much WIP, it might be useful to someone.
 
 ### Note:
 
-Check [README](/README.md) for the state of this resource!
+Check [README](/README.md) for a somewhat accurate state of this resource!
 
 The contents in this directory are not directly used during the building process, and are exluded in the csproj file.  
 The unity project constains everything that gets turned into an asset bundle named "toiletleech", with the accompanying file "toiletleech.manifest".
