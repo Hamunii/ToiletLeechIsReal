@@ -4,6 +4,8 @@ Here you will find information regarding our assets and how to work with them.
 
 ### Note:
 
+Check [README](/README.md) for the state of this resource!
+
 The contents in this directory are not directly used during the building process, and are exluded in the csproj file.  
 The unity project constains everything that gets turned into an asset bundle named "toiletleech", with the accompanying file "toiletleech.manifest".
 
