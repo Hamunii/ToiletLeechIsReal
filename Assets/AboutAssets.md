@@ -119,7 +119,7 @@ Anyways, you might also need to add these files from `Lethal Company/BepInEx/cor
 >- MonoMod.RuntimeDetour.dll
 >- MonoMod.Utils.dll
 
-Also, you might want to add `BepInEx.Harmony.dll` too from the same location, but for me it causes Unity to crash so I don't have it. Idk if this is for everyone, but we don't seem to need that file anyways for making the asset bundle.
+Also, you would probably normally want to add `BepInEx.Harmony.dll` too from the same location, but it causes Unity to crash when building asset bundles, so we don't add it. But we don't seem to need that file anyways for making our asset bundle. If you know why this is, please tell about it!
 
 We also depend on LethalLib by Evaisa (which is already included in the project), and it depends on MMHOOK, so you need to run the game once with MMHOOK so these dll files are generated:
 >- MMHOOK_AmazingAssets.TerrainToMesh.dll
