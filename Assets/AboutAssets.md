@@ -11,12 +11,12 @@ Check [README](/README.md) for a somewhat accurate state of the progress so far 
 The contents in this directory are not directly used during the building process, and are excluded in the csproj file.
 In the assets folder, you will find a folder “UnityProject”. This unity project file contains everything needed, and gets turned into an asset bundle (when opened with Unity 2022.3.9f1) named "toiletleech", using the accompanying file "toiletleech.manifest". 
 
-All of the software used in the  process is available for free download on both Windows and Linux. However, on Linux, it is possible that Unity 2022.3.9f1 might output sounds into the wrong place, which is a known bug in Unity. I don't know a solution for this, but if you don't hear anything in the Unity editor, this might be the issue. Fortunately, the sounds should still work once the asset bundle is exported and the game is launched with your new mod installed.
+All of the software used in this process is available for free download on both Windows and Linux. However, on Linux, it is possible that Unity 2022.3.9f1 might output sounds into the wrong place, which is a known bug in Unity. I don't know a solution for this, but if you don't hear anything in the Unity editor, this might be the issue. Fortunately, the sounds should still work once the asset bundle is exported and the game is launched with your new mod installed.
 
 ## Blender
 
 > https://www.blender.org/about/  
-Blender is a free and open source 3D creation suite. It supports the entirety of the 3D pipeline—modeling, rigging, animation, simulation, rendering, compositing and motion tracking, even video editing and game creation.
+Blender is a free and open source 3D creation suite. It supports the entirety of the 3D pipeline—modelling, rigging, animation, simulation, rendering, compositing and motion tracking, even video editing and game creation.
 
 Blender is an amazing program and it can do everything you want when making your 3D model. Files that end with .blend or .blend1 (a backup) are blender projects. While you work with these files, you need to export your model as fbx when importing it to Unity. However, in order to model, rig and animate your models, you will need to learn blender first.  
 
@@ -28,31 +28,31 @@ Here are some resources to get started with Blender:
 
 **Pro Tip!** Don't press random keys, as Blender has a lot of keyboard shortcuts and you might have no idea what you just did or how to undo it. That said, keyboard shortcuts can speed up your workflow by a lot, and you can use this [Blender Shortcuts Cheat Sheet](https://docs.google.com/document/d/1zPBgZAdftWa6WVa7UIFUqW_7EcqOYE0X743RqFuJL3o/edit?pli=1#heading=h.ftqi9ub1gec3) by Blender Guru, which can be useful.
 
-If you have absolutely no experience about Blender, the 4 first parts of this series will be relevant.  
+If you have absolutely no experience with Blender, the 4 first parts of this series will be relevant.  
 [Blender 4.0 Beginner Donut Tutorial](https://www.youtube.com/playlist?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) (playlist) - Blender Guru
-- [Part 1: Introduction](https://youtu.be/B0J27sf9N1Y?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Introduces Blender and very basic things
-- [Part 2: Basic Modelling](https://youtu.be/tBpnKTAc5Eo?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Self-explanatory
-- [Part 3: Modelling the Icing](https://youtu.be/AqJx5TJyhes?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z&t=42) - introduces more advanced modeling techniques
-- [Part 4: Sculpting](https://youtu.be/--GVNZnSROc?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Sculpting can be especially useful when modeling organic things
+- [Part 1: Introduction](https://youtu.be/B0J27sf9N1Y?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Introduces the very basics of Blender
+- [Part 2: Basic Modelling](https://youtu.be/tBpnKTAc5Eo?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Self-explanatory (Learn to model a Donut)
+- [Part 3: Modelling the Icing](https://youtu.be/AqJx5TJyhes?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z&t=42) - introduces more advanced modelling techniques (Detailing)
+- [Part 4: Sculpting](https://youtu.be/--GVNZnSROc?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Sculpting can be especially useful when modelling organic things
 
-### Modeling
+### Modelling
 
-- [Fast Character Modeling with the Skin Modifier in Blender](https://youtu.be/DAAwy_l4jw4) - Joey Carlino
-    - Introduces a super cool and easy modeling technique. I recommend this a lot for making basic initial meshes for characters.
+- [Fast Character Modelling with the Skin Modifier in Blender](https://youtu.be/DAAwy_l4jw4) - Joey Carlino
+    - Introduces a super cool and easy modelling technique. I recommend this a lot for learning to make basic initial meshes for characters or creatures.
 
 // TODO: add more resources
 
-### Modeling - Common issues
+### Modelling - Common Issues
 
 **My mesh looks inverted in Blender or when imported to Unity.**  
-This is because your normals are inverted in a way or another. Select your mesh in Edit Mode, press A to select everything, press Shift+N to recalculate normals (do not select "Inside", it is the flipped state).  
-If this doesn't fix it when importing to Unity, you likely have resized your object by a negative amount. This looks normal in Blender, but not in Unity. To fix this, go into Object Mode, select your object, press Ctrl+A, select apply scale. Now your normals should have flipped in Blender. Now, recalculate normals.
+This is because your normals got inverted in one way or another. Select your mesh in Edit Mode, press A to select everything, press Shift+N to recalculate your normals (do not select "Inside", that is the flipped state).  
+If this doesn't fix the problem after importing to Unity, you likely have accidentally resized your object by a negative amount. This looks normal in Blender, but not in Unity. To fix this, go into Object Mode, select your object, press Ctrl+A, select apply scale. Now your normals should have flipped in Blender. Now, recalculate normals.
 
 // TODO: add more stuff
 
 ### Materials & Texturing, UV Unwrapping
 
-**Note:** Unity does not understand Blender's shader node system. If you use it for other than the princibled BSDF, you need to bake your material as a texture for it to work in Unity. Do also note that Lethal Company adds its style to everything, so you don't need to worry about that. However, textures are not necessary so you can basically skip this section entirely.
+**Note:** Unity does not understand Blender's shader node system. If you use it for anything other than the princibled BSDF, you will have to bake your material as a texture before it will work in Unity. Also make note of the fact that Lethal Company automatically adds its own "style" to everything, so you don't need to worry about that. However, textures are not necessary so you can basically skip this section entirely.
 
 // TODO: add resources
 
@@ -61,9 +61,9 @@ If this doesn't fix it when importing to Unity, you likely have resized your obj
 - [Tutorial: My New Rigging Workflow in Blender](https://youtu.be/BiPoPMnU2VI) - Polyfjord
     - Inverse kinematics on a mechanical character. Very useful for rigging legs.
 - [Rigging for impatient people - Blender Tutorial](https://youtu.be/DDeB4tDVCGY) - Joey Carlino
-    - A lot of useful stuff about rigging. Very fast paced, so maybe better to watch after a more introductory tutorial.
+    - Includes a lot of useful information about rigging, but it's a very fast paced video. Can be fairly hard to follow for a complete beginner. Likely a better watch after you've seen the more basic introductory type tutorials first.
 - [How to Rig and Animate in BLENDER!](https://youtu.be/1khSuB6sER0) - ProductionCrate
-    - Making a rig for a humanoid character, fixing issues with Blender's automatic weights feature, inverse kinematics. 
+    - Learn how to make a rig for a humanoid character, fix issues with Blender's automatic weights feature, as well as inverse kinematics. 
 
 // TODO: add more resources
 
@@ -82,19 +82,19 @@ If this doesn't fix it when importing to Unity, you likely have resized your obj
 
 // TODO: add more resources
 
-### Exporting assets for Unity
+### Exporting Assets For Unity
 
 Export the model as fbx
 // TODO: write the rest
 
 ## Unity
 
-Important! Lethal Company uses Unity version 2022.3.9f1, and therefore we use it too in order to avoid any issues with version differences when exporting our asset bundles.  
-You can download Unity Hub (which is where you install 2022.3.9f1) from https://unity.com/download, or if you are on Linux, you should probably use the unofficial [Flatpak](https://flathub.org/apps/com.unity.UnityHub) package, or follow [these install instructions](https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux) if you truly despise Flatpak.
+IMPORTANT! Lethal Company uses Unity version 2022.3.9f1, and therefore we must use it too in order to avoid any issues with version differences when exporting our asset bundles.  
+You can download Unity Hub (which is where you install 2022.3.9f1) from https://unity.com/download, https://unity.com/releases/editor/whats-new/2022.3.9 or if you are on Linux, you should probably use the unofficial [Flatpak](https://flathub.org/apps/com.unity.UnityHub) package, or follow [these install instructions](https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux) if you truly despise Flatpak.
 
 You can open the Unity project by choosing to open a project from disk, and selecting the UnityProject folder. When Unity has loaded the project, look into the ToiletLeech folder for the assets that make up the asset bundle.
 
-### Setting up the Unity project
+### Setting Up The Unity Project
 
 **Note:** The [SETUP-PROJECT.py](/SETUP-PROJECT.py) script will copy all of the dlls files for you! So if you run it, you can ignore this section almost entirely.
 
@@ -133,7 +133,7 @@ We also depend on LethalLib by Evaisa (which is already included in the project)
 
 The dll file of this mod also needs to be there so we can reference ToiletLeechAI from a component of the Toilet Leech prefab in Unity. It needs to be from the dll file, you cannot just copy and paste the ToiletLeechAI.cs file in the Unity project because asset bundles cannot contain scripts, and it just doesn't get the reference otherwise. You know it doesn't get the reference in the form of a yellow warning text if you launch the game with the mod and you have unity logging enabled in the `BepInEx.cfg` file.
 
-### What are asset bundles?
+### What Are Asset Bundles?
 
 > https://docs.unity3d.com/Manual/AssetBundlesIntro.html  
 An AssetBundle is an archive file that contains platform-specific non-code Assets (such as Models, Textures, Prefabs, Audio clips, and even entire Scenes) that Unity can load at run time. AssetBundles can express dependencies between each other; for example, a Material in one AssetBundle can reference a Texture in another AssetBundle. For efficient delivery over networks, you can compress AssetBundles with a choice of built-in algorithms depending on use case requirements (LZMA and LZ4).
@@ -144,7 +144,7 @@ An AssetBundle is an archive file that contains platform-specific non-code Asset
 
 Asset bundles are a way for us to basically transfer our enemy from our Unity project to Lethal Company.
 
-### Our Toilet Leech assets in Unity
+### Our Toilet Leech Assets In Unity
 
 We have made a ToiletLeech folder in our Unity project. Everything that goes into our asset bundle is in there.
 The first thing we did was import our fbx model into Unity. It contains all the materials, textures and animations of our model when first imported, but it is good to separate some of that stuff into their own folders. We have extracted our materials into the `Materials` folder.
@@ -160,12 +160,12 @@ The EnemyType thingy has some configuration options, and the most important thin
 
 // TODO: write the rest
 
-### Adding things to an asset bundle
+### Adding Things To An Asset Bundle
 
 To add a thing to an asset bundle, you first need to select the object you want to add, and then on the asset bundle dropdown, select "New..." and write the name of your asset bundle. Or if you already have an asset bundle, you can just select that. You don't actually need to assign everything you need to the asset bundle as long as the thing you assigned to the asset bundle depends on the rest of the things, which in our case is true.  
 ![Screenshot: assign to asset bundle](./ForTutorial/AssignToAssetBundle.png)
 
-### How to build an asset bundle:
+### How To Build An Asset Bundle:
 
 1. Open asset bundle browser (this plugin is included in the Lethal Company Unity Template):  
 ![Screenshot: open asset bundle browser](./ForTutorial/OpenAssetBundleBrowser.png)
