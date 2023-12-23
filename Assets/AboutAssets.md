@@ -1,23 +1,25 @@
 # About Assets
 
-The goal of this resource and project is to be a reference implementation and documentation on custom enemies.
-While this is still very much WIP, it might be useful to someone.
+The goal of this project is to make a resource guide and reference documentation to help explain the steps behind the creation and implementation of a custom enemy.
+While this is still very much a Work In Progress, I hope it will be useful to someone.
+
 
 ### Note:
 
-Check [README](/README.md) for a somewhat accurate state of this resource!
+Check [README](/README.md) for a somewhat accurate state of the progress so far on this resource!
 
-The contents in this directory are not directly used during the building process, and are exluded in the csproj file.  
-The unity project constains everything that gets turned into an asset bundle named "toiletleech", with the accompanying file "toiletleech.manifest".
+The contents in this directory are not directly used during the building process, and are excluded in the csproj file.
+In the assets folder, you will find a folder “UnityProject”. This unity project file contains everything needed, and gets turned into an asset bundle (when opened with Unity 2022.3.9f1) named "toiletleech", using the accompanying file "toiletleech.manifest". 
 
-All of the software used in this process are available on both Windows and Linux. However, on Linux, it is possible that Unity 2022.3.9f1 might output sounds into the wrong place, which is a bug in Unity. I don't know a solution for this, but if you don't hear anything in the Unity editor, this might be the issue. The sounds should still work when the asset bundle is exported and the game is launched with the mod.
+All of the software used in the  process is available for free download on both Windows and Linux. However, on Linux, it is possible that Unity 2022.3.9f1 might output sounds into the wrong place, which is a known bug in Unity. I don't know a solution for this, but if you don't hear anything in the Unity editor, this might be the issue. Fortunately, the sounds should still work once the asset bundle is exported and the game is launched with your new mod installed.
 
 ## Blender
 
 > https://www.blender.org/about/  
-Blender is the free and open source 3D creation suite. It supports the entirety of the 3D pipeline—modeling, rigging, animation, simulation, rendering, compositing and motion tracking, even video editing and game creation.
+Blender is a free and open source 3D creation suite. It supports the entirety of the 3D pipeline—modeling, rigging, animation, simulation, rendering, compositing and motion tracking, even video editing and game creation.
 
-Blender is an amazing program and it can do everything you want when making your 3D model. Files that end with .blend or .blend1 (a backup) are blender projects. While you work with these files, you need to export your model as fbx when importing it to Unity. However, in order to model, rig and animate your models, you need to learn blender first.  
+Blender is an amazing program and it can do everything you want when making your 3D model. Files that end with .blend or .blend1 (a backup) are blender projects. While you work with these files, you need to export your model as fbx when importing it to Unity. However, in order to model, rig and animate your models, you will need to learn blender first.  
+
 You can install Blender from https://www.blender.org/download/, or if you are on Linux, I recommend installing the [Flatpak](https://flathub.org/apps/org.blender.Blender) package.
 
 Here are some resources to get started with Blender:

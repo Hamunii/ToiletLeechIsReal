@@ -2,7 +2,7 @@
 
 ### Note: This project is still very much a WIP. See the progress at the bottom of this page
 
-This repo contains the full source code for Toilet Leech enemy for Lethal Company, including the Unity project which is used to make the asset bundle. This project is designed to be used as a template/reference for creating your own modded enemy, and even comes with [a guide](/Assets/AboutAssets.md)! The guide explains the asset bundle side of Toilet Leech, as it is not as straight forward as the coding side. The code of this project can be found under the `src` directory, and as you can see, there doesn't need to be much code for a custom enemy.
+This repo contains the full source code for the Toilet Leech enemy for Lethal Company, including the Unity project which is used to make the asset bundle. This project is designed to be used as a template/reference for creating your own modded enemy, and even comes with [a guide](/Assets/AboutAssets.md)! The guide explains the asset bundle side of Toilet Leech, as it is not as straight forward as the coding side. The code of this project can be found under the `src` directory, and as you can see, there doesn't need to be much code for a custom enemy.
 
 ### Setting up the project for development
 
