@@ -6,7 +6,7 @@ This repo contains the full source code for Toilet Leech enemy for Lethal Compan
 
 ### Setting up the project for development
 
-After copying this repo for yourself, run [SETUP-PROJECT.py](/SETUP-PROJECT.py) to copy all the DLL files from the game files that the C# project and the Unity project depend on. However, make sure you have https://thunderstore.io/c/lethal-company/p/Evaisa/HookGenPatcher/ installed and ran the game at least once with it so it can generate a few files. That should be all the required setup for this project, and now you can move to coding AI or making your own 3D models for your custom enemy. Good luck! And make sure you read [the guide](/Assets/AboutAssets.md)!
+After copying this repo for yourself, run [SETUP-PROJECT.py](/SETUP-PROJECT.py) (make sure you have Python installed) to copy all the DLL files from the game files that the C# project and the Unity project depend on. However, make sure you have https://thunderstore.io/c/lethal-company/p/Evaisa/HookGenPatcher/ installed and ran the game at least once with it so it can generate a few files. That should be all the required setup for this project, and now you can move to coding AI or making your own 3D models for your custom enemy. Good luck! And make sure you read [the guide](/Assets/AboutAssets.md)!
 
 ### Looking for a mod install link?
 This is the GitHub repository where the source code of this mod is hosted. **Mod files are not found here**, but will be uploaded to Thunderstore once this mod is ready enough.

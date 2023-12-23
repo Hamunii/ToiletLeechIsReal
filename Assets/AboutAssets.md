@@ -94,6 +94,8 @@ You can open the Unity project by choosing to open a project from disk, and sele
 
 ### Setting up the Unity project
 
+**Note:** The [SETUP-PROJECT.py](/SETUP-PROJECT.py) script will copy all of the dlls files for you! So if you run it, you can ignore this section almost entirely.
+
 The Unity project we have is based off of Evaisa's [Lethal Company Unity Template](https://github.com/EvaisaDev/LethalCompanyUnityTemplate/) (hence the LICENSE file in that folder. I have no idea if I can remove it or not). HOWEVER, just like with our dlls in the root directory of this repository, we need to add some dll files into our `UnityProject/Assets/Plugins` folder. These are listed in the README of Evaisa's repository, but here's the list so you don't miss it:
 >- AmazingAssets.TerrainToMesh.dll
 >- ClientNetworkTransform.dll
@@ -119,7 +121,7 @@ Anyways, you might also need to add these files from `Lethal Company/BepInEx/cor
 
 Also, you might want to add `BepInEx.Harmony.dll` too from the same location, but for me it causes Unity to crash so I don't have it. Idk if this is for everyone, but we don't seem to need that file anyways for making the asset bundle.
 
-We also depend on LethalLib by Evaisa (which is already included in the project), and it depends on MMHOOK, so I think you need to run the game once with MMHOOK add their dlls too I guess. (actually I have no idea about any of this and I'm probably wrong considering we already have non-MMHOOK dlls included, so please try building the asset bundle without these, and if the mod works with that asset bundle, message me. I don't feel like wasting time on this right now):
+We also depend on LethalLib by Evaisa (which is already included in the project), and it depends on MMHOOK, so you need to run the game once with MMHOOK so these dll files are generated:
 >- MMHOOK_AmazingAssets.TerrainToMesh.dll
 >- MMHOOK_Assembly-CSharp.dll
 >- MMHOOK_ClientNetworkTransform.dll
