@@ -10,7 +10,7 @@ Check [README](/README.md) for a somewhat accurate state of this resource!
 The contents in this directory are not directly used during the building process, and are exluded in the csproj file.  
 The unity project constains everything that gets turned into an asset bundle named "toiletleech", with the accompanying file "toiletleech.manifest".
 
-All of the software used in this process are available on both Windows and Linux. However, on Linux, it is possible that Unity 2022.3.9f might output sounds into the wrong place, which is a bug in Unity. I don't know a solution for this, but if you don't hear anything in the Unity editor, this might be the issue. The sounds should still work when the asset bundle is exported and the game is launched with the mod.
+All of the software used in this process are available on both Windows and Linux. However, on Linux, it is possible that Unity 2022.3.9f1 might output sounds into the wrong place, which is a bug in Unity. I don't know a solution for this, but if you don't hear anything in the Unity editor, this might be the issue. The sounds should still work when the asset bundle is exported and the game is launched with the mod.
 
 ## Blender
 
@@ -87,8 +87,8 @@ Export the model as fbx
 
 ## Unity
 
-Important! Lethal Company uses Unity version 2022.3.9f, and therefore we use it too in order to avoid any issues with version differences when exporting our asset bundles.  
-You can download Unity Hub (which is where you install 2022.3.9f) from https://unity.com/download, or if you are on Linux, you should probably use the unofficial [Flatpak](https://flathub.org/apps/com.unity.UnityHub) package, or follow [these install instructions](https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux) if you truly despise Flatpak.
+Important! Lethal Company uses Unity version 2022.3.9f1, and therefore we use it too in order to avoid any issues with version differences when exporting our asset bundles.  
+You can download Unity Hub (which is where you install 2022.3.9f1) from https://unity.com/download, or if you are on Linux, you should probably use the unofficial [Flatpak](https://flathub.org/apps/com.unity.UnityHub) package, or follow [these install instructions](https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux) if you truly despise Flatpak.
 
 You can open the Unity project by choosing to open a project from disk, and selecting the UnityProject folder. When Unity has loaded the project, look into the ToiletLeech folder for the assets that make up the asset bundle.
 

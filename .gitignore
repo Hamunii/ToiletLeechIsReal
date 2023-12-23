@@ -45,5 +45,6 @@ Backup/
 /Properties
 UpgradeLog.htm
 
-# Exclude UnityProject, it has its own .gitignore
+# Exclude stuff
+!/dlls/LethalLib.dll
 !/Assets/UnityProject/

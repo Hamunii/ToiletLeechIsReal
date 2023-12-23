@@ -41,8 +41,6 @@
     <Reference Include="UnityEngine"><HintPath>../dlls/UnityEngine.CoreModule.dll</HintPath></Reference>
     <Reference Include="Assembly-CSharp"><HintPath>../dlls/Assembly-CSharp.dll</HintPath></Reference>
     <Reference Include="Unity.Netcode.Runtime"><HintPath>../dlls/Unity.Netcode.Runtime.dll</HintPath></Reference>
-	  <Reference Include="UnityEngine.UI"><HintPath>../dlls/UnityEngine.UI.dll</HintPath></Reference>
-	  <Reference Include="UnityEngine.UI"><HintPath>../dlls/UnityEngine.UI.dll</HintPath></Reference>
 	  <Reference Include="LethalLib"><HintPath>../dlls/LethalLib.dll</HintPath></Reference>
 
   </ItemGroup>
