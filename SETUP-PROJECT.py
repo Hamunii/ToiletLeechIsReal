@@ -121,7 +121,7 @@ gotMMHOOKFiles = None
 if r2modmanPath is not None:
    for dir in os.listdir(r2modmanPath):
       if os.path.exists(f'{r2modmanPath}/{dir}/BepInEx/core'):
-         gotFiles = True
+         gotCoreFiles = True
          for dllFile in neededCoreDlls:
             shutil.copy2(f'{r2modmanPath}/{dir}/BepInEx/core/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
             print(f'Got: {unityPluginsRelative}/{dllFile}')
@@ -147,8 +147,22 @@ if not gotMMHOOKFiles:
          print(f'Got: {unityPluginsRelative}/{dllFile}')
 
 if not gotCoreFiles:
-   print(color.red + f"No BepInEx/core directory found! Please install r2modman or BepInEx manually.")
-   exitProgram()
+   print(color.red + f"No BepInEx/core directory found! If you have no mod manager for Lethal Company, please install r2modman or setup BepInEx for Lethal Company manually.\n"
+   f"{color.yellow}Or if you have a mod manager installed, please paste the full path to BepInEx folder: (otherwise press enter)" + color.reset)
+   userInputBepInExPath = input()
+   if os.path.exists(f'{userInputBepInExPath}/core'):
+         print(color.lightblue + f'BepInEx/core found: {userInputBepInExPath}/core' + color.reset)
+         gotCoreFiles = True
+         for dllFile in neededCoreDlls:
+            shutil.copy2(f'{userInputBepInExPath}/core/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
+            print(f'Got: {unityPluginsRelative}/{dllFile}')
+   if os.path.exists(f'{userInputBepInExPath}/Plugins/MMHOOK'):
+      gotMMHOOKFiles = True
+      for dllFile in os.listdir(f'{userInputBepInExPath}/Plugins/MMHOOK'):
+         shutil.copy2(f'{userInputBepInExPath}/Plugins/MMHOOK/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
+         print(f'Got: {unityPluginsRelative}/{dllFile}')
+   if not gotCoreFiles:
+      exitProgram()
 
 if not gotMMHOOKFiles:
    print(color.red + f"No MMHOOK directory found! These DLL files are needed for our LethalLib dependency.\nPlease do the following to fix this:\n"
