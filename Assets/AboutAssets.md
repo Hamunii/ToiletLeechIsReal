@@ -8,15 +8,15 @@ While this is still very much a Work In Progress, I hope it will be useful to so
 
 Check [README](/README.md) for a somewhat accurate state of the progress so far on this resource!
 
-The contents in this directory are not directly used during the building process, and are excluded in the csproj file.
-In the assets folder, you will find a folder “UnityProject”. This unity project file contains everything needed, and gets turned into an asset bundle (when opened with Unity 2022.3.9f1) named "toiletleech", using the accompanying file "toiletleech.manifest". 
+The contents in this directory are not directly used during the building process, and are excluded in the csproj file.  
+In the assets folder, you will find a folder “UnityProject”. This unity project file contains everything needed, and we use Unity 2022.3.9f1 to build an asset bundle named "toiletleech", using the accompanying file "toiletleech.manifest". 
 
-All of the software used in this process is available for free download on both Windows and Linux. However, on Linux, it is possible that Unity 2022.3.9f1 might output sounds into the wrong place, which is a known bug in Unity. I don't know a solution for this, but if you don't hear anything in the Unity editor, this might be the issue. Fortunately, the sounds should still work once the asset bundle is exported and the game is launched with your new mod installed.
+All of the software used in this process is available for free download on both Windows and Linux. However, on Linux, it is possible that Unity 2022.3.9f1 might output sounds into the wrong place, which is a known bug in Unity. I don't know a solution for this, but if you don't hear anything in the Unity editor, this might be the issue. Fortunately, the sounds should still work once the asset bundle is exported and the game is launched with your new mod enabled.
 
 ## Blender
 
 > https://www.blender.org/about/  
-Blender is a free and open source 3D creation suite. It supports the entirety of the 3D pipeline—modelling, rigging, animation, simulation, rendering, compositing and motion tracking, even video editing and game creation.
+Blender is a free and open source 3D creation suite. It supports the entirety of the 3D pipeline—modeling, rigging, animation, simulation, rendering, compositing and motion tracking, even video editing and game creation.
 
 Blender is an amazing program and it can do everything you want when making your 3D model. Files that end with .blend or .blend1 (a backup) are blender projects. While you work with these files, you need to export your model as fbx when importing it to Unity. However, in order to model, rig and animate your models, you will need to learn blender first.  
 
@@ -31,22 +31,22 @@ Here are some resources to get started with Blender:
 If you have absolutely no experience with Blender, the 4 first parts of this series will be relevant.  
 [Blender 4.0 Beginner Donut Tutorial](https://www.youtube.com/playlist?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) (playlist) - Blender Guru
 - [Part 1: Introduction](https://youtu.be/B0J27sf9N1Y?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Introduces the very basics of Blender
-- [Part 2: Basic Modelling](https://youtu.be/tBpnKTAc5Eo?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Self-explanatory (Learn to model a Donut)
-- [Part 3: Modelling the Icing](https://youtu.be/AqJx5TJyhes?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z&t=42) - introduces more advanced modelling techniques (Detailing)
-- [Part 4: Sculpting](https://youtu.be/--GVNZnSROc?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Sculpting can be especially useful when modelling organic things
+- [Part 2: Basic Modeling](https://youtu.be/tBpnKTAc5Eo?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Self-explanatory (Learn to model a Donut)
+- [Part 3: Modeling the Icing](https://youtu.be/AqJx5TJyhes?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z&t=42) - introduces more advanced modeling techniques (Detailing)
+- [Part 4: Sculpting](https://youtu.be/--GVNZnSROc?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Sculpting can be especially useful when modeling organic things
 
-### Modelling
+### Modeling
 
-- [Fast Character Modelling with the Skin Modifier in Blender](https://youtu.be/DAAwy_l4jw4) - Joey Carlino
-    - Introduces a super cool and easy modelling technique. I recommend this a lot for learning to make basic initial meshes for characters or creatures.
+- [Fast Character Modeling with the Skin Modifier in Blender](https://youtu.be/DAAwy_l4jw4) - Joey Carlino
+    - Introduces a super cool and easy modeling technique. I recommend this a lot for learning to make basic initial meshes for characters or creatures.
 
 // TODO: add more resources
 
-### Modelling - Common Issues
+### Modeling - Common Issues
 
 **My mesh looks inverted in Blender or when imported to Unity.**  
 This is because your normals got inverted in one way or another. Select your mesh in Edit Mode, press A to select everything, press Shift+N to recalculate your normals (do not select "Inside", that is the flipped state).  
-If this doesn't fix the problem after importing to Unity, you likely have accidentally resized your object by a negative amount. This looks normal in Blender, but not in Unity. To fix this, go into Object Mode, select your object, press Ctrl+A, select apply scale. Now your normals should have flipped in Blender. Now, recalculate normals.
+If this doesn't fix the problem after importing to Unity, you likely have resized your object by a negative amount. This looks normal in Blender, but not in Unity. To fix this, go into Object Mode, select your object, press Ctrl+A, select apply scale. Now your normals should have flipped in Blender. Now, recalculate normals.
 
 // TODO: add more stuff
 
@@ -90,7 +90,7 @@ Export the model as fbx
 ## Unity
 
 IMPORTANT! Lethal Company uses Unity version 2022.3.9f1, and therefore we must use it too in order to avoid any issues with version differences when exporting our asset bundles.  
-You can download Unity Hub (which is where you install 2022.3.9f1) from https://unity.com/download, https://unity.com/releases/editor/whats-new/2022.3.9, or if you are on Linux, you should probably use the unofficial [Flatpak](https://flathub.org/apps/com.unity.UnityHub) package instead, or follow [these install instructions](https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux) if you truly despise Flatpak.
+You can download Unity Hub (which is where you install 2022.3.9f1) from https://unity.com/download, https://unity.com/releases/editor/whats-new/2022.3.9, or if you are on Linux, you should probably use the unofficial [Flatpak](https://flathub.org/apps/com.unity.UnityHub) package, or follow [these install instructions](https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux) if you truly despise Flatpak.
 
 You can open the Unity project by choosing to open a project from disk, and selecting the UnityProject folder. When Unity has loaded the project, look into the ToiletLeech folder for the assets that make up the asset bundle.
 
