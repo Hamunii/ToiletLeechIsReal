@@ -43,4 +43,4 @@ NOTE: Contributions are welcome! This will help new modders get started with mak
 - [ ] Enemy attacks
     - [ ] spit attack: will slow player movement
     - [ ] suck attack: will suck players who are stuck or get too close
-    - [ ] fire attack???
+    - [ ] fire attack????
