@@ -17,13 +17,18 @@ class color:
    lightblue = '\033[94m'
    lightcyan = '\033[96m'
 
+def exitProgram():
+   print(color.reset + 'Press Enter to close the program...')
+   input()
+   exit()
+
 # Locate our dlls directory in this repo
 thisPath = os.getcwd()
 dllsRelative = 'dlls'
 dllDestination = f'{thisPath}/{dllsRelative}'
 if not os.path.exists(dllDestination):
    print(color.red + f'Setup script could not find path: {dllDestination}.{color.yellow}\nMake sure you run this script from the root of the repo directory.')
-   exit()
+   exitProgram()
 
 # Locate the game's data folder
 gameFilesPath = None
@@ -39,8 +44,8 @@ if gameFilesPath is None:
    if os.path.exists(userInputGamePath):
       gameFilesPath = userInputGamePath
    else:
-      print(color.red + "Could not find location. Exiting the program.")
-      exit()
+      print(color.red + "Could not find location.")
+      exitProgram()
 print(color.lightblue + f'Game data path found: {gameFilesPath}' + color.reset)
 
 # Copy dlls for C# project
@@ -62,12 +67,12 @@ if not os.path.exists(unityProjectPath):
    if os.path.exists(userInputUnityPath):
       unityProjectPath = userInputUnityPath
    else:
-      print(color.red + "Could not find location. Exiting the program.")
-      exit()
+      print(color.red + "Could not find location.")
+      exitProgram()
 
 if not os.path.exists(f'{unityProjectPath}/{unityPluginsRelative}'):
-   print(color.red + f"Your Unity Project does not have a {unityPluginsRelative} folder!\nMake sure your Unity project is based off of Evaisa's Lethal Company Unity Template. Exiting program.")
-   exit()
+   print(color.red + f"Your Unity Project does not have a {unityPluginsRelative} folder!\nMake sure your Unity project is based off of Evaisa's Lethal Company Unity Template.")
+   exitProgram()
 print(color.lightblue + f'Unity Plugins path found: {unityProjectPath}/{unityPluginsRelative}' + color.reset)
 
 # Copying dlls for Unity project
@@ -143,10 +148,10 @@ if not gotMMHOOKFiles:
 
 if not gotCoreFiles:
    print(color.red + f"No BepInEx/core directory found! Please install r2modman or BepInEx manually.")
-   exit()
+   exitProgram()
 
 if not gotMMHOOKFiles:
-   print(color.red + f"No MMHOOK directory found! Please do the following:\n"
+   print(color.red + f"No MMHOOK directory found! These DLL files are needed for our LethalLib dependency.\nPlease do the following to fix this:\n"
    "1) Install https://thunderstore.io/c/lethal-company/p/Evaisa/HookGenPatcher/\n"
    "2) Run the game once to generate the folder and its contents\n"
    "3) Run this script again\n"
@@ -155,14 +160,15 @@ if not gotMMHOOKFiles:
    if os.path.exists(userInputGamePath):
       gameFilesPath = userInputGamePath
       if os.path.exists(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK'):
-         print(color.lightblue + f'Game installation found: {gameFilesPath}' + color.reset)
+         print(color.lightblue + f'Game installation with MMHOOK found: {gameFilesPath}' + color.reset)
          gotMMHOOKFiles = True
          for dllFile in os.listdir(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK'):
             shutil.copy2(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
             print(f'Got: {unityPluginsRelative}/{dllFile}')  
 
 if not gotMMHOOKFiles:
-   print(color.red + "Could not find location. Exiting the program.")
-   exit()
+   print(color.red + "Could not find location.")
+   exitProgram()
 
 print(color.lightblue + f'Project Setup Complete!{color.lightcyan}\n> You should now be able to build the C# project, including the Asset Bundle!')
+exitProgram()
