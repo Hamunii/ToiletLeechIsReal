@@ -1,6 +1,7 @@
 # Toilet Leech Is Real
 
-### Note: This project is still very much a WIP. See the progress at the bottom of this page
+> [!NOTE]  
+> This project is still very much a WIP. See the progress at the bottom of this page
 
 This repository contains the full source code for the Toilet Leech enemy for Lethal Company, including the Unity project which can be used to make an asset bundle. This project is designed to be used as a template/reference for creating your own modded enemy, and even comes with [a guide](/Assets/AboutAssets.md)! The guide explains the asset bundle side of Toilet Leech, as it is not as straight forward as the coding side. The code of this project can be found under the `src` directory, and as you can see, there doesn't need to be much code for a custom enemy.
 
@@ -13,7 +14,8 @@ This is the GitHub repository where the source code of this mod is hosted. **Mod
 
 ### AboutAssets.md Resource Progress
 
-NOTE: Contributions are welcome! This will help new modders get started with making custom enemies, so it would be super awesome if you contributed your knowledge and shared some useful resources! Feel free to open an issue or ping me on discord under the toilet leech post or DM me! This resource could possibly find its way to the Lethal Company Modding Wiki.
+> [!NOTE]  
+> Contributions are welcome! This will help new modders get started with making custom enemies, so it would be super awesome if you contributed your knowledge and shared some useful resources! Feel free to open an issue or ping me on discord under the toilet leech post or DM me! This resource could possibly find its way to the Lethal Company Modding Wiki.
 
 - [ ] Blender resources
     - [x] Basics

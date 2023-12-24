@@ -4,9 +4,8 @@ The goal of this project is to make a resource guide and reference documentation
 While this is still very much a Work In Progress, I hope it will be useful to someone.
 
 
-### Note:
-
-Check [README](/README.md) for a somewhat accurate state of the progress so far on this resource!
+> [!NOTE]  
+> Check [README](/README.md) for a somewhat accurate state of the progress so far on this resource!
 
 The contents in this directory are not directly used during the building process, and are excluded in the csproj file.  
 In the assets folder, you will find a folder “UnityProject”. This unity project file contains everything needed, and we use Unity 2022.3.9f1 to build an asset bundle named "toiletleech", using the accompanying file "toiletleech.manifest". 
@@ -26,7 +25,8 @@ Here are some resources to get started with Blender:
 
 ### Basics
 
-**Pro Tip!** Don't press random keys, as Blender has a lot of keyboard shortcuts and you might have no idea what you just did or how to undo it. That said, keyboard shortcuts can speed up your workflow by a lot, and you can use this [Blender Shortcuts Cheat Sheet](https://docs.google.com/document/d/1zPBgZAdftWa6WVa7UIFUqW_7EcqOYE0X743RqFuJL3o/edit?pli=1#heading=h.ftqi9ub1gec3) by Blender Guru, which can be useful.
+> [!TIP]  
+> Don't press random keys, as Blender has a lot of keyboard shortcuts and you might have no idea what you just did or how to undo it. That said, keyboard shortcuts can speed up your workflow by a lot, and you can use this [Blender Shortcuts Cheat Sheet](https://docs.google.com/document/d/1zPBgZAdftWa6WVa7UIFUqW_7EcqOYE0X743RqFuJL3o/edit?pli=1#heading=h.ftqi9ub1gec3) by Blender Guru, which can be useful.
 
 If you have absolutely no experience with Blender, the 4 first parts of this series will be relevant.  
 [Blender 4.0 Beginner Donut Tutorial](https://www.youtube.com/playlist?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) (playlist) - Blender Guru
@@ -52,7 +52,8 @@ If this doesn't fix the problem after importing to Unity, you likely have resize
 
 ### Materials & Texturing, UV Unwrapping
 
-**Note:** Unity does not understand Blender's shader node system. If you use it for anything other than the princibled BSDF, you will have to bake your material as a texture before it will work in Unity. Also make note of the fact that Lethal Company automatically adds its own "style" to everything, so you don't need to worry about that. However, textures are not necessary so you can basically skip this section entirely.
+> [!NOTE]  
+> Unity does not understand Blender's shader node system. If you use it for anything other than the princibled BSDF, you will have to bake your material as a texture before it will work in Unity. Also make note of the fact that Lethal Company automatically adds its own "style" to everything, so you don't need to worry about that. However, textures are not necessary so you can basically skip this section entirely.
 
 // TODO: add resources
 
@@ -69,7 +70,8 @@ If this doesn't fix the problem after importing to Unity, you likely have resize
 
 ### Animation & NLA (Nonlinear Animation) Editor
 
-**Note:** We put our individual animations in the NLA Editor so we can use them separately in Unity. The length of the animation in Unity will be the length that you set in the NLA editor. This is important to know if you set an animation cycle to repeat a certain amount of times in Blender when you want to for example preview it in combination with your other animations.
+> [!NOTE]  
+> We put our individual animations in the NLA Editor so we can use them separately in Unity. The length of the animation in Unity will be the length that you set in the NLA editor. This is important to know if you set an animation cycle to repeat a certain amount of times in Blender when you want to for example preview it in combination with your other animations.
 
 - [The Nuts and Bolts of Blender's animation system](https://youtu.be/p3m57yAcsi0) - CGDive
     - Introduces concepts in a very in-depth way. Introduces Timeline, Dope Sheet, Graph Editor, NLA Editor, Actions.
@@ -89,14 +91,17 @@ Export the model as fbx
 
 ## Unity
 
-IMPORTANT! Lethal Company uses Unity version 2022.3.9f1, and therefore we must use it too in order to avoid any issues with version differences when exporting our asset bundles.  
+> [!IMPORTANT]  
+> Lethal Company uses Unity version 2022.3.9f1, and therefore we must use it too in order to avoid any issues with version differences when exporting our asset bundles.  
+
 You can download Unity Hub (which is where you install 2022.3.9f1) from https://unity.com/download, https://unity.com/releases/editor/whats-new/2022.3.9, or if you are on Linux, you should probably use the unofficial [Flatpak](https://flathub.org/apps/com.unity.UnityHub) package, or follow [these install instructions](https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux) if you truly despise Flatpak.
 
 You can open the Unity project by choosing to open a project from disk, and selecting the UnityProject folder. When Unity has loaded the project, look into the ToiletLeech folder for the assets that make up the asset bundle.
 
 ### Setting Up The Unity Project
 
-**Note:** The [SETUP-PROJECT.py](/SETUP-PROJECT.py) script will copy all of the dlls files for you! So if you run it, you can ignore this section almost entirely.
+> [!NOTE]  
+> The [SETUP-PROJECT.py](/SETUP-PROJECT.py) script will copy all of the dlls files for you! So if you run it, you can ignore this section almost entirely.
 
 The Unity project we have is based off of Evaisa's [Lethal Company Unity Template](https://github.com/EvaisaDev/LethalCompanyUnityTemplate/) (hence the LICENSE file in that folder. I have no idea if I can remove it or not). HOWEVER, just like with our dlls in the root directory of this repository, we need to add some dll files into our `UnityProject/Assets/Plugins` folder. These are listed in the README of Evaisa's repository, but here's the list so you don't miss it:
 >- AmazingAssets.TerrainToMesh.dll
@@ -175,6 +180,7 @@ To add a thing to an asset bundle, you first need to select the object you want 
 ![Screenshot: build asset bundle](./ForTutorial/BuildAssetBundle.png)
 4. Then we copy both `toiletleech` and `toiletleech.manifest` to the root of this repository. (Actually, we could probably just reference them without copy pasting them as they exist in this repository already. If you try this and it works, and you might have to edit the csproj file for that, please open an issue or a pull request. I don't have time to do that right now.)
 
-Note: if you don't have Windows standalone build support installed in your Unity installation, close unity and install it from Unity Hub. I'm not 100% sure if this is actually needed, but I had no luck getting the materials of the model working in the asset bundle when I had my build target set to Linux, which I didn't realize could affect anything.
+> [!NOTE]  
+> If you don't have Windows standalone build support installed in your Unity installation, close unity and install it from Unity Hub. I'm not 100% sure if this is actually needed, but I had no luck getting the materials of the model working in the asset bundle when I had my build target set to Linux, which I didn't realize could affect anything.
 
 // TODO: write the rest
