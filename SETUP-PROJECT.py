@@ -22,6 +22,14 @@ def exitProgram():
    input()
    exit()
 
+def copyDLLs(sourceDir: str, destinationDir: str, dllList: list) -> bool:
+   if os.path.exists(sourceDir):
+      for dllFile in dllList:
+         shutil.copy2(f'{sourceDir}/{dllFile}', f'{destinationDir}/{dllFile}')
+         print(f'Got: {dllFile}')
+      return True
+   return False
+
 # Locate our dlls directory in this repo
 thisPath = os.getcwd()
 dllsRelative = 'dlls'
@@ -52,9 +60,7 @@ print(color.lightblue + f'Game data path found: {gameFilesPath}' + color.reset)
 print('Copying for C# project:')
 gameDataRelative = 'Lethal Company_Data/Managed'
 neededGameDllFiles = ["Assembly-CSharp.dll", "Unity.Netcode.Runtime.dll", "UnityEngine.CoreModule.dll"]
-for dllFile in neededGameDllFiles:
-   shutil.copy2(f'{gameFilesPath}/{gameDataRelative}/{dllFile}', f'{dllDestination}/{dllFile}')
-   print(f'Got: {dllsRelative}/{dllFile}')
+copyDLLs(f'{gameFilesPath}/{gameDataRelative}', dllDestination, neededGameDllFiles)
 
 print(color.green + f'Done copying to {dllDestination}!' + color.reset)
 
@@ -86,9 +92,7 @@ neededPluginDllFiles =[
    "Newtonsoft.Json.dll",
    "Assembly-CSharp-firstpass.dll"
 ]
-for dllFile in neededPluginDllFiles:
-   shutil.copy2(f'{gameFilesPath}/{gameDataRelative}/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
-   print(f'Got: {unityPluginsRelative}/{dllFile}')
+copyDLLs(f'{gameFilesPath}/{gameDataRelative}', f'{unityProjectPath}/{unityPluginsRelative}', neededPluginDllFiles)
 
 print(color.green + f'Done copying game DLLs to {unityProjectPath}/{unityPluginsRelative}!' + color.reset)
 
@@ -116,53 +120,37 @@ neededCoreDlls = [
    "MonoMod.RuntimeDetour.dll",
    "MonoMod.Utils.dll"
 ]
+neededMMHOOKDlls = [
+   "MMHOOK_AmazingAssets.TerrainToMesh.dll",
+   "MMHOOK_Assembly-CSharp.dll",
+   "MMHOOK_ClientNetworkTransform.dll",
+   "MMHOOK_DissonanceVoip.dll",
+   "MMHOOK_Facepunch.Steamworks.Win64.dll",
+   "MMHOOK_Facepunch Transport for Netcode for GameObjects.dll"
+]
 gotCoreFiles = None
 gotMMHOOKFiles = None
 if r2modmanPath is not None:
    for dir in os.listdir(r2modmanPath):
-      if os.path.exists(f'{r2modmanPath}/{dir}/BepInEx/core'):
-         gotCoreFiles = True
-         for dllFile in neededCoreDlls:
-            shutil.copy2(f'{r2modmanPath}/{dir}/BepInEx/core/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
-            print(f'Got: {unityPluginsRelative}/{dllFile}')
-      if os.path.exists(f'{r2modmanPath}/{dir}/BepInEx/Plugins/MMHOOK'):
-         gotMMHOOKFiles = True
-         for dllFile in os.listdir(f'{r2modmanPath}/{dir}/BepInEx/Plugins/MMHOOK'):
-            shutil.copy2(f'{r2modmanPath}/{dir}/BepInEx/Plugins/MMHOOK/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
-            print(f'Got: {unityPluginsRelative}/{dllFile}')
+      gotCoreFiles = copyDLLs(f'{r2modmanPath}/{dir}/BepInEx/core', f'{unityProjectPath}/{unityPluginsRelative}', neededCoreDlls)
+      gotMMHOOKFiles = copyDLLs(f'{r2modmanPath}/{dir}/Plugins/MMHOOK', f'{unityProjectPath}/{unityPluginsRelative}', neededMMHOOKDlls)
 
 # Testing against non-r2modman installation if the mods exist there
 if not gotCoreFiles:
-   if os.path.exists(f'{gameFilesPath}/BepInEx/core'):
-      gotCoreFiles = True
-      for dllFile in neededCoreDlls:
-         shutil.copy2(f'{gameFilesPath}/BepInEx/core/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
-         print(f'Got: {unityPluginsRelative}/{dllFile}')
+      gotCoreFiles = copyDLLs(f'{gameFilesPath}/BepInEx/core', f'{unityProjectPath}/{unityPluginsRelative}', neededCoreDlls)
 
 if not gotMMHOOKFiles:
-   if os.path.exists(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK'):
-      gotMMHOOKFiles = True
-      for dllFile in os.listdir(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK'):
-         shutil.copy2(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
-         print(f'Got: {unityPluginsRelative}/{dllFile}')
+      gotMMHOOKFiles = copyDLLs(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK', f'{unityProjectPath}/{unityPluginsRelative}', neededMMHOOKDlls)
 
 if not gotCoreFiles:
    print(color.red + f"No BepInEx/core directory found! If you have no mod manager for Lethal Company, please install r2modman or setup BepInEx for Lethal Company manually.\n"
    f"{color.yellow}Or if you have a mod manager installed, please paste the full path to BepInEx folder: (otherwise press enter)" + color.reset)
    userInputBepInExPath = input()
-   if os.path.exists(f'{userInputBepInExPath}/core'):
-         print(color.lightblue + f'BepInEx/core found: {userInputBepInExPath}/core' + color.reset)
-         gotCoreFiles = True
-         for dllFile in neededCoreDlls:
-            shutil.copy2(f'{userInputBepInExPath}/core/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
-            print(f'Got: {unityPluginsRelative}/{dllFile}')
-   if os.path.exists(f'{userInputBepInExPath}/Plugins/MMHOOK'):
-      gotMMHOOKFiles = True
-      for dllFile in os.listdir(f'{userInputBepInExPath}/Plugins/MMHOOK'):
-         shutil.copy2(f'{userInputBepInExPath}/Plugins/MMHOOK/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
-         print(f'Got: {unityPluginsRelative}/{dllFile}')
+   gotCoreFiles = copyDLLs(f'{userInputBepInExPath}/core', f'{unityProjectPath}/{unityPluginsRelative}', neededCoreDlls)
    if not gotCoreFiles:
       exitProgram()
+   print(color.lightblue + f'BepInEx/core found: {userInputBepInExPath}/core' + color.reset)
+   gotMMHOOKFiles = copyDLLs(f'{userInputBepInExPath}/Plugins/MMHOOK', f'{unityProjectPath}/{unityPluginsRelative}', neededMMHOOKDlls)
 
 if not gotMMHOOKFiles:
    print(color.red + f"No MMHOOK directory found! These DLL files are needed for our LethalLib dependency.\nPlease do the following to fix this:\n"
@@ -175,10 +163,7 @@ if not gotMMHOOKFiles:
       gameFilesPath = userInputGamePath
       if os.path.exists(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK'):
          print(color.lightblue + f'Game installation with MMHOOK found: {gameFilesPath}' + color.reset)
-         gotMMHOOKFiles = True
-         for dllFile in os.listdir(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK'):
-            shutil.copy2(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK/{dllFile}', f'{unityProjectPath}/{unityPluginsRelative}')
-            print(f'Got: {unityPluginsRelative}/{dllFile}')  
+         gotMMHOOKFiles = copyDLLs(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK', f'{unityProjectPath}/{unityPluginsRelative}', neededMMHOOKDlls)
 
 if not gotMMHOOKFiles:
    print(color.red + "Could not find location.")
