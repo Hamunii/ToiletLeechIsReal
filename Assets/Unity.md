@@ -1,4 +1,4 @@
-# Opening our Unity Project
+### Opening our Unity Project
 
 You can open the Unity project included in this repository by choosing to open a project from disk, and selecting the `UnityProject` folder. When Unity has loaded the project, look into the ToiletLeech folder for the assets that make up the asset bundle.
 
