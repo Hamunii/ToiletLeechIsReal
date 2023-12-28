@@ -1,8 +1,7 @@
 # About Assets
 
-The goal of this project is to make a resource guide and reference documentation to help explain the steps behind the creation and implementation of a custom enemy.
-While this is still very much a Work In Progress, I hope it will be useful to someone.
-
+This guide is a part of the full project, which includes full source code to our example enemy: the Toilet Leech. You can grab your own copy of this repository and start working on your modded enemy, using this guide and everyting included as a reference for how to get things working!  
+While this is still a Work In Progress, I hope it will be useful!
 
 > [!NOTE]  
 > Check [README](/README.md) for a somewhat accurate state of the progress so far on this resource!
