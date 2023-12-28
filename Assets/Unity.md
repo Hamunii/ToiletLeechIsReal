@@ -56,7 +56,7 @@ Asset bundles are a way for us to basically transfer our enemy from our Unity pr
 ### Our Toilet Leech Assets In Unity
 
 We have made a ToiletLeech folder in our Unity project. Everything that goes into our asset bundle is in there.
-The first thing we did was import our fbx model into Unity. It contains all the materials, textures and animations of our model when first imported, but it is good to separate some of that stuff into their own folders. We have extracted our materials into the `Materials` folder.
+The first thing we did was import our fbx model into Unity. This is as simple as dragging our fbx file into our assets, or right clicking and choosing `Import New Asset...` and choosing our fbx file. The exported fbx model contains all our materials, textures and animations when first imported, but it is good to separate some of that stuff into their own folders. We have extracted our materials into the `Materials` folder.
 
 We have also copied the individual animations into the `Animations` folder, because I don't know how to separate them properly, but we can just ignore the animations embedded in the fbx file and use the copies inside the `Animations` folder anyways.
 
@@ -67,7 +67,26 @@ Anyways, how do we make the game see our assets as an enemy? Well, we create a n
 
 The EnemyType Scriptable Object has some configuration options, and the most important thing is the "Enemy Prefab" part of it. This is where we tell it what the model and whatever stuff our EnemyType has. Also note the "Enemy Name" thingy, this will be the name of the ToiletLeech enemy in the coding side of things.
 
-// TODO: write the rest
+### The Toilet Leech Prefab
+
+We have added these components to our prefab for everything to work properly:  
+![Screenshot: Toilet Leech Prefab in inspector](./ForTutorial/ToiletLeechPrefabInspector.png)
+
+1. Toilet Leech AI (Script)
+    - This script can be found in `src/ToiletLeechAI.cs` at the root of this repository, and has been referenced from our build dll file in the Unity project so our prefab can recognize it as the same script. We have configuration options on Unity side that come from the `EnemyAI` class, as our AI class inherits from that.
+2. Network Object
+    - Needs to be added so our enemy works fine on multiplayer, or something like that. After you reference your AI script, Unity will automatically prompt you to add this component.
+3. Nav Mesh Agent
+    - Allows our enemy to act as a nav mesh agent, which is Unity's system for making easy pathfinding in 3D with the help of a nav mesh that the agents walk on.
+4. Animator
+    - This allows us to control the animations of our model. This deserves its own section, and I barely know anything about Unity's animation system.
+5. Box Collider
+    - Allows us to figure out if the player collides with our enemy. Does not necessarily need to be a box, but a box is very efficient. Note that we have enabled `Is Trigger` for this collider.
+6. Audio Source
+    - Allows us to play audio from the prefab. Note that `Spatial Blend` needs to be set to `3D` for the audio to sound like it's coming from a point in 3D space, instead of from everywhere.
+
+> [!IMPORTANT]
+> The Enemy in this project has not been yet configured completely. We will work on finalizing the enemy soon so we can also release the mod to Thunderstore so any mod developer can find this project easily and get started on their own custom enemies.
 
 ### Adding Things To An Asset Bundle
 

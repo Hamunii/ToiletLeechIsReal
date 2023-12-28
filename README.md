@@ -29,8 +29,8 @@ This is the GitHub repository where the source code of this mod is hosted. **Mod
     - [x] What are asset bundles?
     - [x] How to add stuff to asset bundles
     - [x] Building asset bundles
-    - [ ] How Toilet Leech is configured
-    - [ ] Importing fbx models (your model from blender)
+    - [x] How Toilet Leech is configured
+    - [x] Importing fbx models (your model from blender)
     - [ ] What are prefabs
     - [ ] Referencing our [AI script](src/ToiletLeechAI.cs) in a prefab
 
