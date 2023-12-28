@@ -45,6 +45,9 @@ Backup/
 /Properties
 UpgradeLog.htm
 
+# Blender backups
+*.blend1
+
 # Exclude stuff
 !/dlls/LethalLib.dll
 !/Assets/UnityProject/

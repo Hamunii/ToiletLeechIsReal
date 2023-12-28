@@ -23,7 +23,7 @@ This is the GitHub repository where the source code of this mod is hosted. **Mod
     - [ ] Materials & texturing, UV Unwrapping
     - [x] Rigging
     - [x] Animation
-    - [ ] How to export model for Unity
+    - [x] How to export model for Unity
     - [ ] Common issues and how to fix them
 - [ ] Unity resources
     - [x] What are asset bundles?

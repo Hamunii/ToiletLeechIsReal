@@ -30,4 +30,4 @@ You can install Blender from https://www.blender.org/download/, or if you are on
 
 You can download Unity Hub (which is where you install 2022.3.9f1) from https://unity.com/download, https://unity.com/releases/editor/whats-new/2022.3.9, or if you are on Linux, you should probably use the unofficial [Flatpak](https://flathub.org/apps/com.unity.UnityHub) package, or follow [these install instructions](https://docs.unity3d.com/hub/manual/InstallHub.html#install-hub-linux) if you truly despise Flatpak.
 
-**For the Unity of this guide, see the [page on Unity](./Unity.md).**
+**For the Unity part of this guide, see the [page on Unity](./Unity.md).**
