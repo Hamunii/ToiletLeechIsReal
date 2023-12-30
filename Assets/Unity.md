@@ -85,10 +85,20 @@ We have added these components to our prefab for everything to work properly:
 6. Audio Source
     - Allows us to play audio from the prefab. Note that `Spatial Blend` needs to be set to `3D` for the audio to sound like it's coming from a point in 3D space, instead of from everywhere.
 
+We also have these as children of the prefab itself:
+1. ScanNode
+    - Allows us to scan the enemy. Make sure the following is set: Tag: `DoNotSet`, Layer: `ScanNode`
+2. MapDot
+    - Allows us to see the enemy on map. Make sure the following is set: Tag: `DoNotSet`, Layer: `MapRadar`
 
+### Toilet Leech Terminal Entry
 
-> [!IMPORTANT]
-> The Enemy in this project has not been yet configured completely. We will work on finalizing the enemy soon so we can also release the mod to Thunderstore so any mod developer can find this project easily and get started on their own custom enemies.
+We need a TerminalNode ScriptableObject for our entry in the bestiary. This contains the bestiary text and displayed enemy name.
+
+> [!NOTE]
+> We have set the name in the bestiary to "TLeech" due to the already existing item "Toilet" causing issues with the game thinking we are trying to buy a toilet and not being able to open the bestiary entry.
+
+We also have a TerminalKeyword ScriptableObject, which has the word that the user needs to write in the terminal to find the page.
 
 ### Adding Things To An Asset Bundle
 
