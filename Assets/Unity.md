@@ -60,12 +60,10 @@ The first thing we did was import our fbx model into Unity. This is as simple as
 
 We have also copied the individual animations into the `Animations` folder, because I don't know how to separate them properly, but we can just ignore the animations embedded in the fbx file and use the copies inside the `Animations` folder anyways.
 
-And at this point of writing this, I realised we have two, probably identical versions of the fbx model in the project, one in the `Models` folder, and one directly in `ToiletLeech`, which is basically our root folder. We are meant to only have the one in `Models` and use that, **but I will fix that later. Also note to self: remove the music.cs file too. It does nothing.** At least, it shouldn't.
-
-Anyways, how do we make the game see our assets as an enemy? Well, we create a new Scriptable Object of type EnemyType. This is what the game uses, so we need it too. Do note that these Scriptable Objects come from the Lethal Company Unity Template this is based off of. Do also note that our UnityProject in this repository is already configured properly *(for other than the missing stuff, like right click showing enemy name and enemy info page getting added to terminal. It will be added when I have time to do so)*.  
+Anyways, how do we make the game see our assets as an enemy? Well, we create a new ScriptableObject of type EnemyType. This is what the game uses, so we need it too. Do note that these ScriptableObjects come from the Lethal Company Unity Template this is based off of. Do also note that our UnityProject in this repository is already configured properly *(for other than the missing stuff, like right click showing enemy name and enemy info page getting added to terminal. It will be added when I have time to do so)*.  
 ![Screenshot: Create object Enemy Type](./ForTutorial/CreateObjectEnemyType.png)
 
-The EnemyType Scriptable Object has some configuration options, and the most important thing is the "Enemy Prefab" part of it. This is where we tell it what the model and whatever stuff our EnemyType has. Also note the "Enemy Name" thingy, this will be the name of the ToiletLeech enemy in the coding side of things.
+The EnemyType ScriptableObject has some configuration options, and the most important thing is the "Enemy Prefab" part of it. This is where we tell it what the model and whatever stuff our EnemyType has. Also note the "Enemy Name" thingy, this will be the name of the ToiletLeech enemy in the coding side of things.
 
 ### The Toilet Leech Prefab
 
@@ -109,7 +107,7 @@ To add a thing to an asset bundle, you first need to select the object you want 
 
 1. Open asset bundle browser (this plugin is included in the Lethal Company Unity Template):  
 ![Screenshot: open asset bundle browser](./ForTutorial/OpenAssetBundleBrowser.png)
-2. Here we can see files that are included in our bundle. The ones that have the bundle as "auto" are things that our thing we have assigned to the asset bundle depends on, so they will be included as well. I don't know what modassets really is, it came with the Lethal Company Unity Template too. Should probably ask Evaisa, but anyways we can ignore it.  
+2. Here we can see files that are included in our bundle. The ones that have the bundle as "auto" are things that our thing we have assigned to the asset bundle depends on, so they will be included as well. Do note that we need to explicitly inclde the assets we want directly refer to in the code. I don't know what modassets really is, it came with the Lethal Company Unity Template too. Should probably ask Evaisa, but anyways we can ignore it.  
 ![Screenshot: Toilet Leech bundle preview](./ForTutorial/ToiletLeechBundlePreview.png)
 3. This is where we build our asset bundle. The asset bundle will be found where output path specifies, which in this case exists in a directory in the root of the Unity project.  
 ![Screenshot: build asset bundle](./ForTutorial/BuildAssetBundle.png)
