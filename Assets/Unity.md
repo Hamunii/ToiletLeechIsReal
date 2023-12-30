@@ -85,6 +85,8 @@ We have added these components to our prefab for everything to work properly:
 6. Audio Source
     - Allows us to play audio from the prefab. Note that `Spatial Blend` needs to be set to `3D` for the audio to sound like it's coming from a point in 3D space, instead of from everywhere.
 
+
+
 > [!IMPORTANT]
 > The Enemy in this project has not been yet configured completely. We will work on finalizing the enemy soon so we can also release the mod to Thunderstore so any mod developer can find this project easily and get started on their own custom enemies.
 
@@ -101,7 +103,7 @@ To add a thing to an asset bundle, you first need to select the object you want 
 ![Screenshot: Toilet Leech bundle preview](./ForTutorial/ToiletLeechBundlePreview.png)
 3. This is where we build our asset bundle. The asset bundle will be found where output path specifies, which in this case exists in a directory in the root of the Unity project.  
 ![Screenshot: build asset bundle](./ForTutorial/BuildAssetBundle.png)
-4. Then we copy both `toiletleech` and `toiletleech.manifest` to the root of this repository. (Actually, we could probably just reference them without copy pasting them as they exist in this repository already. If you try this and it works, and you might have to edit the csproj file for that, please open an issue or a pull request. I don't have time to do that right now.)
+4. Then we copy `toiletleech` to the root of this repository. (Actually, we could probably just reference it without copy pasting as it exist in this repository already. If you try this and it works, and you might have to edit the csproj file for that, please open an issue or a pull request. I don't have time to do that right now.)
 
 > [!NOTE]  
 > If you don't have Windows standalone build support installed in your Unity installation, close unity and install it from Unity Hub. I'm not 100% sure if this is actually needed, but I had no luck getting the materials of the model working in the asset bundle when I had my build target set to Linux, which I didn't realize could affect anything.

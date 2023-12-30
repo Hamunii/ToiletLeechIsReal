@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3951824486
+CRC: 3737044885
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b2a618ba8c66b431819f8d524be02081
+    Hash: 3e653ba4fb21293a3da4530bbfdad251
   TypeTreeHash:
     serializedVersion: 2
-    Hash: dbdf4f7d183dbbda4b9aa60c5bc4c3d0
+    Hash: d58671d32f0e7bc31300a95a0c5b2456
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: b2a618ba8c66b431819f8d524be02081
+    Hash: 3e653ba4fb21293a3da4530bbfdad251
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -43,7 +43,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 65d3fcb39dd67306e9bb17a603308070, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 3c36d0a92cbb1f26a39169ef0eae393a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0e80ae96b3eb9177eea5c8f9dadbcda1, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d3cecf05b78b173605122a700874719c, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 137
@@ -57,4 +63,6 @@ SerializeReferenceClassIdentifiers:
   ClassName: EnemyBehaviourState
 Assets:
 - Assets/ToiletLeech/ToiletLeech.asset
+- Assets/ToiletLeech/ToiletLeechTK.asset
+- Assets/ToiletLeech/ToiletLeechTN.asset
 Dependencies: []

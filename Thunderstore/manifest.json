@@ -2,6 +2,6 @@
     "name": "ToiletLeechIsReal",
     "version_number": "0.0.1",
     "website_url": "https://github.com/Hamunii/ToiletLeechIsReal",
-    "description": "This revolutionary mod brings to life the unused toilet leech enemy which exists deep within the game files.",
+    "description": "This revolutionary mod makes the Toilet Leech enemy real.",
     "dependencies": ["BepInEx-BepInExPack-5.4.2100", "Evaisa-HookGenPatcher-0.0.4", "Evaisa-LethalLib-0.1.3"]
 }

@@ -5,6 +5,7 @@ using HarmonyLib;
 using LethalLib.Modules;
 using static LethalLib.Modules.Levels;
 using static LethalLib.Modules.Enemies;
+using System.Linq;
 
 namespace ToiletLeechIsReal {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
@@ -16,9 +17,11 @@ namespace ToiletLeechIsReal {
             Assets.PopulateAssets();
 
             toiletLeech = Assets.MainAssetBundle.LoadAsset<EnemyType>("ToiletLeech");
+            var tlTerminalNode = Assets.MainAssetBundle.LoadAsset<TerminalNode>("ToiletLeechTN");
+            var tlTerminalKeyword = Assets.MainAssetBundle.LoadAsset<TerminalKeyword>("ToiletLeechTK");
             
             NetworkPrefabs.RegisterNetworkPrefab(toiletLeech.enemyPrefab);
-			RegisterEnemy(toiletLeech, 100, LevelTypes.All, SpawnType.Outside);
+			RegisterEnemy(toiletLeech, 100, LevelTypes.All, SpawnType.Outside, tlTerminalNode, tlTerminalKeyword);
 
             // Is this the most efficient way of printing ascii art? Maybe not, but it'll do.
             // Also, it would be funny if the toilet leech said something random, with speech bubbles!

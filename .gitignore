@@ -36,7 +36,6 @@ msbuild.wrn
 # Visual Studio
 .vs/
 Backup/
-*.sln
 
 # Assemblies
 *.dll
