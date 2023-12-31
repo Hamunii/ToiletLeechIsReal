@@ -93,10 +93,15 @@ We also have these as children of the prefab itself:
 
 We need a TerminalNode ScriptableObject for our entry in the bestiary. This contains the bestiary text and displayed enemy name.
 
-> [!NOTE]
+> [!NOTE]  
 > We have set the name in the bestiary to "TLeech" due to the already existing item "Toilet" causing issues with the game thinking we are trying to buy a toilet and not being able to open the bestiary entry.
 
 We also have a TerminalKeyword ScriptableObject, which has the word that the user needs to write in the terminal to find the page.
+
+The enemy spinning animation on the beastiary entry background is a video file, and you can make one yourself by for example using the decimate (if you have a lot of geometry) and wireframe modifiers.
+
+> [!IMPORTANT]  
+> Unity Editor on Linux has [bad support for video files](https://docs.unity3d.com/Manual/VideoSources-FileCompatibility.html), so you might want to [encode your video to VP8 using FFmpeg](https://trac.ffmpeg.org/wiki/Encode/VP8). Unfortunately, Blender does not have an option to encode to VP8.
 
 ### Adding Things To An Asset Bundle
 
