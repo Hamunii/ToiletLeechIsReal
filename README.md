@@ -37,7 +37,7 @@ This is the GitHub repository where the source code of this mod is hosted. **Mod
 ### Mod Progress
 
 - [x] Mod builds, enemy works in game, even if the AI is super basic
-- [ ] All enemy components are there (right click shows enemy name, enemy info page gets added to terminal)
+- [x] All enemy components are there (right click shows enemy name, enemy info page gets added to terminal)
 - [ ] More complex, interesting AI
     - [ ] likes music?
     - [ ] 2 or 3 spit attacks used in short succession: enemy gets exhausted and the head gets smaller and it will be at its weakest. A good moment to flush the toilet
