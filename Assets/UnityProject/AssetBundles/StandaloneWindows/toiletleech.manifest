@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3737044885
+CRC: 3694858664
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3e653ba4fb21293a3da4530bbfdad251
+    Hash: 9eea14e5adafebb7ad3ad040049c12ff
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d58671d32f0e7bc31300a95a0c5b2456
+    Hash: 869825946e7690764c90f634cd59f859
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 3e653ba4fb21293a3da4530bbfdad251
+    Hash: 9eea14e5adafebb7ad3ad040049c12ff
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -56,6 +56,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 195
   Script: {instanceID: 0}
+- Class: 329
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers:
 - AssemblyName: Assembly-CSharp
   ClassName: AISearchRoutine
@@ -63,6 +65,6 @@ SerializeReferenceClassIdentifiers:
   ClassName: EnemyBehaviourState
 Assets:
 - Assets/ToiletLeech/ToiletLeech.asset
-- Assets/ToiletLeech/ToiletLeechTK.asset
-- Assets/ToiletLeech/ToiletLeechTN.asset
+- Assets/ToiletLeech/Bestiary/ToiletLeechTK.asset
+- Assets/ToiletLeech/Bestiary/ToiletLeechTN.asset
 Dependencies: []
