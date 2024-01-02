@@ -1,4 +1,5 @@
-﻿using GameNetcodeStuff;
+﻿using System;
+using GameNetcodeStuff;
 using UnityEngine;
 
 namespace ToiletLeechIsReal {
@@ -14,7 +15,11 @@ namespace ToiletLeechIsReal {
 
     class ToiletLeechAI : EnemyAI {
 
+        public Transform turnCompass;
         float timeSinceHittingLocalPlayer;
+        float timeSinceNewRandPos;
+        Vector3 positionRandomness;
+        Vector3 StalkPos;
 
         public override void Start()
 		{
@@ -22,15 +27,29 @@ namespace ToiletLeechIsReal {
             var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             myLogSource.LogInfo("Toilet Leech Spawned");
             timeSinceHittingLocalPlayer = 0;
+            timeSinceNewRandPos = 0;
+            positionRandomness = new Vector3(0, 0, 0);
 		}
         public override void Update(){
             base.Update();
+            if(isEnemyDead){
+                return;
+            }
+            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             timeSinceHittingLocalPlayer += Time.deltaTime;
+            timeSinceNewRandPos += Time.deltaTime;
+            if(PlayerIsTargetable != null){
+                turnCompass.LookAt(targetPlayer.gameplayCamera.transform.position);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0f, turnCompass.eulerAngles.y, 0f)), 3f * Time.deltaTime);
+            }
+            // myLogSource.LogInfo($"Time: {timeSinceNewRandPos}");
         }
 
         public override void DoAIInterval()
         {
+            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             base.DoAIInterval();
+
             if (!isEnemyDead && !StartOfRound.Instance.allPlayersDead)
             {
                 if (TargetClosestPlayer(4f))
@@ -45,16 +64,36 @@ namespace ToiletLeechIsReal {
                     movingTowardsTargetPlayer = false;
                     // This is flawed creatureAnimator logic
                     creatureAnimator.SetTrigger("stopWalk");
-
                 }
+            }
+            if (PlayerIsTargetable(targetPlayer)) {
+                if(timeSinceNewRandPos > 0.7f){
+                    timeSinceNewRandPos = 0;
+                    if(UnityEngine.Random.Range(0, 10) == 0){
+                        // Attack
+                        StalkPos = targetPlayer.transform.position;
+                        creatureAnimator.SetTrigger("swingAttack");
+                        myLogSource.LogInfo($"swingAttack animation");
+                    }
+                    else{
+                        // In front of player
+                        positionRandomness = new Vector3(UnityEngine.Random.Range(-2, 2f), 0, UnityEngine.Random.Range(-2f, 2f));
+                        StalkPos = targetPlayer.transform.position - Vector3.Scale(new Vector3(-6, 0, -6), targetPlayer.transform.forward) + positionRandomness;
+                    }
+                }
+                SetDestinationToPosition(StalkPos);
+                agent.speed = 5f;
+            }
+            else{
+                agent.speed = 3.5f;
             }
         }
 
-        // this is perhaps not the most optimal way to deal with this, but idk
-        private void OnTriggerStay(Collider other)
+        public override void OnCollideWithPlayer(Collider other)
         {
             // Also I think there is a better way to do this logging thing, but idk how.
             var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
+            myLogSource.LogInfo("Toilet Leech Collision");
             if (timeSinceHittingLocalPlayer < 0.25f)
             {
                 return;

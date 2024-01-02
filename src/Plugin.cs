@@ -5,7 +5,6 @@ using HarmonyLib;
 using LethalLib.Modules;
 using static LethalLib.Modules.Levels;
 using static LethalLib.Modules.Enemies;
-using System.Linq;
 
 namespace ToiletLeechIsReal {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]

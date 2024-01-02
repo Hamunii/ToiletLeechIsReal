@@ -562,9 +562,83 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
+--- !u!1001 &1524170356
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4653223892326777022, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_Name
+      value: toilet-leech-obj-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465191632302234116, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.6367687
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465191632302234116, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.000000059604645
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465191632302234116, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.028097391
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465191632302234116, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465191632302234116, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465191632302234116, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465191632302234116, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465191632302234116, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465191632302234116, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465191632302234116, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5968074885591470640, guid: d5b97fa77117156f6aa61bbbb8f6d001,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1562680374
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d5b97fa77117156f6aa61bbbb8f6d001, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 94541414}
   - {fileID: 42923844}
+  - {fileID: 1524170356}
