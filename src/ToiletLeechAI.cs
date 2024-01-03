@@ -21,12 +21,15 @@ namespace ToiletLeechIsReal {
         float timeSinceNewRandPos;
         Vector3 positionRandomness;
         Vector3 StalkPos;
-        ManualLogSource myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
+        ManualLogSource myLogSource;
 
         public override void Start()
 		{
 			base.Start();
+
+            myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             myLogSource.LogInfo("Toilet Leech Spawned");
+            
             timeSinceHittingLocalPlayer = 0;
             timeSinceNewRandPos = 0;
             positionRandomness = new Vector3(0, 0, 0);
