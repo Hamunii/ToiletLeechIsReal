@@ -1,5 +1,6 @@
 ﻿using System;
-using BepInEx.Logging;
+using System.Collections;
+using System.Collections.Generic;
 using GameNetcodeStuff;
 using UnityEngine;
 
@@ -17,19 +18,17 @@ namespace ToiletLeechIsReal {
     class ToiletLeechAI : EnemyAI {
 
         public Transform turnCompass;
+        public Transform attackArea;
         float timeSinceHittingLocalPlayer;
         float timeSinceNewRandPos;
         Vector3 positionRandomness;
         Vector3 StalkPos;
-        ManualLogSource myLogSource;
 
         public override void Start()
 		{
 			base.Start();
-
-            myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
+            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             myLogSource.LogInfo("Toilet Leech Spawned");
-            
             timeSinceHittingLocalPlayer = 0;
             timeSinceNewRandPos = 0;
             positionRandomness = new Vector3(0, 0, 0);
@@ -39,6 +38,7 @@ namespace ToiletLeechIsReal {
             if(isEnemyDead){
                 return;
             }
+            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             timeSinceHittingLocalPlayer += Time.deltaTime;
             timeSinceNewRandPos += Time.deltaTime;
             if(PlayerIsTargetable != null){
@@ -50,6 +50,7 @@ namespace ToiletLeechIsReal {
 
         public override void DoAIInterval()
         {
+            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             base.DoAIInterval();
 
             if (!isEnemyDead && !StartOfRound.Instance.allPlayersDead)
@@ -71,11 +72,9 @@ namespace ToiletLeechIsReal {
             if (PlayerIsTargetable(targetPlayer)) {
                 if(timeSinceNewRandPos > 0.7f){
                     timeSinceNewRandPos = 0;
-                    if(UnityEngine.Random.Range(0, 10) == 0){
+                    if(UnityEngine.Random.Range(0, 5) == 0){
                         // Attack
-                        StalkPos = targetPlayer.transform.position;
-                        creatureAnimator.SetTrigger("swingAttack");
-                        myLogSource.LogInfo($"swingAttack animation");
+                        StartCoroutine(SwingAttack());
                     }
                     else{
                         // In front of player
@@ -93,6 +92,8 @@ namespace ToiletLeechIsReal {
 
         public override void OnCollideWithPlayer(Collider other)
         {
+            // Also I think there is a better way to do this logging thing, but idk how.
+            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             myLogSource.LogInfo("Toilet Leech Collision");
             if (timeSinceHittingLocalPlayer < 0.25f)
             {
@@ -105,6 +106,27 @@ namespace ToiletLeechIsReal {
                 myLogSource.LogInfo("Toilet Leech Collision!!");
                 timeSinceHittingLocalPlayer = 0f;
                 playerControllerB.DamagePlayer(20);
+            }
+        }
+
+        IEnumerator SwingAttack(){
+            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
+            StalkPos = targetPlayer.transform.position;
+            yield return new WaitForSeconds(0.5f);
+            creatureAnimator.SetTrigger("swingAttack");
+            myLogSource.LogInfo($"swingAttack animation");
+            yield return new WaitForSeconds(0.24f);
+            Collider[] hitColliders = Physics.OverlapBox(attackArea.position, attackArea.localScale, Quaternion.identity, 1 << 3);
+            if(hitColliders.Length > 0){
+                foreach (var player in hitColliders){
+                    PlayerControllerB playerControllerB = MeetsStandardPlayerCollisionConditions(player);
+                    if (playerControllerB != null)
+                    {
+                        myLogSource.LogInfo("Swing attack!!!!");
+                        timeSinceHittingLocalPlayer = 0f;
+                        playerControllerB.DamagePlayer(20);
+                    }
+                }
             }
         }
     }
