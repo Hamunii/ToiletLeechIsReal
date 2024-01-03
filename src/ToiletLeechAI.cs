@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using GameNetcodeStuff;
 using UnityEngine;
 
@@ -16,6 +18,7 @@ namespace ToiletLeechIsReal {
     class ToiletLeechAI : EnemyAI {
 
         public Transform turnCompass;
+        public Transform attackArea;
         float timeSinceHittingLocalPlayer;
         float timeSinceNewRandPos;
         Vector3 positionRandomness;
@@ -69,11 +72,9 @@ namespace ToiletLeechIsReal {
             if (PlayerIsTargetable(targetPlayer)) {
                 if(timeSinceNewRandPos > 0.7f){
                     timeSinceNewRandPos = 0;
-                    if(UnityEngine.Random.Range(0, 10) == 0){
+                    if(UnityEngine.Random.Range(0, 5) == 0){
                         // Attack
-                        StalkPos = targetPlayer.transform.position;
-                        creatureAnimator.SetTrigger("swingAttack");
-                        myLogSource.LogInfo($"swingAttack animation");
+                        StartCoroutine(SwingAttack());
                     }
                     else{
                         // In front of player
@@ -105,6 +106,27 @@ namespace ToiletLeechIsReal {
                 myLogSource.LogInfo("Toilet Leech Collision!!");
                 timeSinceHittingLocalPlayer = 0f;
                 playerControllerB.DamagePlayer(20);
+            }
+        }
+
+        IEnumerator SwingAttack(){
+            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
+            StalkPos = targetPlayer.transform.position;
+            yield return new WaitForSeconds(0.5f);
+            creatureAnimator.SetTrigger("swingAttack");
+            myLogSource.LogInfo($"swingAttack animation");
+            yield return new WaitForSeconds(0.24f);
+            Collider[] hitColliders = Physics.OverlapBox(attackArea.position, attackArea.localScale, Quaternion.identity, 1 << 3);
+            if(hitColliders.Length > 0){
+                foreach (var player in hitColliders){
+                    PlayerControllerB playerControllerB = MeetsStandardPlayerCollisionConditions(player);
+                    if (playerControllerB != null)
+                    {
+                        myLogSource.LogInfo("Swing attack!!!!");
+                        timeSinceHittingLocalPlayer = 0f;
+                        playerControllerB.DamagePlayer(20);
+                    }
+                }
             }
         }
     }
