@@ -1,4 +1,5 @@
 ﻿using System;
+using BepInEx.Logging;
 using GameNetcodeStuff;
 using UnityEngine;
 
@@ -20,11 +21,11 @@ namespace ToiletLeechIsReal {
         float timeSinceNewRandPos;
         Vector3 positionRandomness;
         Vector3 StalkPos;
+        ManualLogSource myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
 
         public override void Start()
 		{
 			base.Start();
-            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             myLogSource.LogInfo("Toilet Leech Spawned");
             timeSinceHittingLocalPlayer = 0;
             timeSinceNewRandPos = 0;
@@ -35,7 +36,6 @@ namespace ToiletLeechIsReal {
             if(isEnemyDead){
                 return;
             }
-            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             timeSinceHittingLocalPlayer += Time.deltaTime;
             timeSinceNewRandPos += Time.deltaTime;
             if(PlayerIsTargetable != null){
@@ -47,7 +47,6 @@ namespace ToiletLeechIsReal {
 
         public override void DoAIInterval()
         {
-            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             base.DoAIInterval();
 
             if (!isEnemyDead && !StartOfRound.Instance.allPlayersDead)
@@ -91,8 +90,6 @@ namespace ToiletLeechIsReal {
 
         public override void OnCollideWithPlayer(Collider other)
         {
-            // Also I think there is a better way to do this logging thing, but idk how.
-            var myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
             myLogSource.LogInfo("Toilet Leech Collision");
             if (timeSinceHittingLocalPlayer < 0.25f)
             {
