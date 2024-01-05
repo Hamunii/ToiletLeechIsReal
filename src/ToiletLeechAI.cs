@@ -101,7 +101,7 @@ namespace ToiletLeechIsReal {
                     }
                 }
                 SetDestinationToPosition(StalkPos);
-                agent.speed = 5f;
+                agent.speed = 4f;
             }
             else{
                 agent.speed = 3.5f;
@@ -112,7 +112,7 @@ namespace ToiletLeechIsReal {
         {
             // Also I think there is a better way to do this logging thing, but idk how.
             myLogSource.LogInfo("Toilet Leech Collision");
-            if (timeSinceHittingLocalPlayer < 0.25f)
+            if (timeSinceHittingLocalPlayer < 1f)
             {
                 return;
             }
@@ -142,6 +142,22 @@ namespace ToiletLeechIsReal {
                         timeSinceHittingLocalPlayer = 0f;
                         playerControllerB.DamagePlayer(20);
                     }
+                }
+            }
+        }
+
+        public override void HitEnemy(int force = 1, PlayerControllerB playerWhoHit = null, bool playHitSFX = false)
+        {
+            base.HitEnemy(force, playerWhoHit, playHitSFX);
+            if(isEnemyDead){
+                return;
+            }
+            enemyHP -= force;
+            if (IsOwner) {
+                if (enemyHP <= 0) {
+                    //creatureAnimator.SetTrigger("Killed");
+                    KillEnemyOnOwnerClient();
+                    return;
                 }
             }
         }
