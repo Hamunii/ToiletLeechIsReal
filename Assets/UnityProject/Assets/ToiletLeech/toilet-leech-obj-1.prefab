@@ -611,6 +611,21 @@ MonoBehaviour:
   isOutside: 0
   turnCompass: {fileID: 4104894747763999597}
   attackArea: {fileID: 2443186484923950125}
+  scoutingSearchRoutine:
+    unsearchedNodes: []
+    currentTargetNode: {fileID: 0}
+    nextTargetNode: {fileID: 0}
+    waitingForTargetNode: 0
+    choseTargetNode: 0
+    currentSearchStartPosition: {x: 0, y: 0, z: 0}
+    loopSearch: 1
+    timesFinishingSearch: 0
+    nodesEliminatedInCurrentSearch: 0
+    inProgress: 0
+    calculatingNodeInSearch: 0
+    searchWidth: 200
+    searchPrecision: 25
+    randomized: 0
 --- !u!114 &5968074885591470640
 MonoBehaviour:
   m_ObjectHideFlags: 0

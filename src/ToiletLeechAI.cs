@@ -18,22 +18,29 @@ namespace ToiletLeechIsReal {
 
     class ToiletLeechAI : EnemyAI {
 
+        // We set these in our Asset Bundle, so we can disable warning CS0649
+        #pragma warning disable 0649
         public Transform turnCompass;
         public Transform attackArea;
+        public AISearchRoutine scoutingSearchRoutine;
+        #pragma warning restore 0649
         float timeSinceHittingLocalPlayer;
         float timeSinceNewRandPos;
         Vector3 positionRandomness;
         Vector3 StalkPos;
         private ManualLogSource myLogSource;
+        bool isSearching;
 
         public override void Start()
 		{
 			base.Start();
-            myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech");
+            myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech AI");
             myLogSource.LogInfo("Toilet Leech Spawned");
             timeSinceHittingLocalPlayer = 0;
             timeSinceNewRandPos = 0;
             positionRandomness = new Vector3(0, 0, 0);
+            isSearching = false;
+            creatureAnimator.SetTrigger("startWalk");
 		}
         public override void Update(){
             base.Update();
@@ -42,7 +49,7 @@ namespace ToiletLeechIsReal {
             }
             timeSinceHittingLocalPlayer += Time.deltaTime;
             timeSinceNewRandPos += Time.deltaTime;
-            if(PlayerIsTargetable != null){
+            if(PlayerIsTargetable != null && !isSearching){
                 turnCompass.LookAt(targetPlayer.gameplayCamera.transform.position);
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0f, turnCompass.eulerAngles.y, 0f)), 3f * Time.deltaTime);
             }
@@ -52,24 +59,35 @@ namespace ToiletLeechIsReal {
         public override void DoAIInterval()
         {
             base.DoAIInterval();
-
+            if (isEnemyDead)
+            {
+                agent.speed = 0f;
+                return;
+            }
             if (!isEnemyDead && !StartOfRound.Instance.allPlayersDead)
             {
-                if (TargetClosestPlayer(4f))
+                if (TargetClosestPlayer(4f) && Vector3.Distance(transform.position, targetPlayer.transform.position) < 25)
                 {
-                    StopSearch(null);
-                    movingTowardsTargetPlayer = true;
-                    creatureAnimator.SetTrigger("startWalk");
+                    if(isSearching){
+                        myLogSource.LogInfo("Target Player");
+                        StopSearch(scoutingSearchRoutine);
+                        isSearching = false;
+                        movingTowardsTargetPlayer = true;
+                    }
                 }
                 else
                 {
-                    StartSearch(base.transform.position, null);
-                    movingTowardsTargetPlayer = false;
-                    // This is flawed creatureAnimator logic
-                    creatureAnimator.SetTrigger("stopWalk");
+                    if(!isSearching){
+                        myLogSource.LogInfo("Stop Target Player");
+                        StartSearch(base.transform.position, scoutingSearchRoutine);
+                        isSearching = true;
+                        movingTowardsTargetPlayer = false;
+                        // This is flawed creatureAnimator logic
+                    }
+                    
                 }
             }
-            if (PlayerIsTargetable(targetPlayer)) {
+            if (PlayerIsTargetable(targetPlayer) && !isSearching) {
                 if(timeSinceNewRandPos > 0.7f){
                     timeSinceNewRandPos = 0;
                     if(UnityEngine.Random.Range(0, 5) == 0){
