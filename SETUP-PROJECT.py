@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import shutil
+import sys
 
 # This is an automated script for copying required dll files into this project.
 # Supports both Windows* and Linux.
@@ -31,7 +32,7 @@ def copyDLLs(sourceDir: str, destinationDir: str, dllList: list) -> bool:
    return False
 
 # Locate our dlls directory in this repo
-thisPath = os.getcwd()
+thisPath = os.path.dirname(os.path.realpath(sys.argv[0]))
 dllsRelative = 'dlls'
 dllDestination = f'{thisPath}/{dllsRelative}'
 if not os.path.exists(dllDestination):
