@@ -45,11 +45,12 @@ namespace ToiletLeechIsReal {
         public override void Update(){
             base.Update();
             if(isEnemyDead){
+                myLogSource.LogInfo("Dead");
                 return;
             }
             timeSinceHittingLocalPlayer += Time.deltaTime;
             timeSinceNewRandPos += Time.deltaTime;
-            if(PlayerIsTargetable != null && !isSearching){
+            if(targetPlayer != null && PlayerIsTargetable(targetPlayer) && !isSearching){
                 turnCompass.LookAt(targetPlayer.gameplayCamera.transform.position);
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0f, turnCompass.eulerAngles.y, 0f)), 3f * Time.deltaTime);
             }
@@ -87,10 +88,10 @@ namespace ToiletLeechIsReal {
                     
                 }
             }
-            if (PlayerIsTargetable(targetPlayer) && !isSearching) {
+            if (targetPlayer != null && PlayerIsTargetable(targetPlayer) && !isSearching) {
                 if(timeSinceNewRandPos > 0.7f){
                     timeSinceNewRandPos = 0;
-                    if(UnityEngine.Random.Range(0, 5) == 0){
+                    if(UnityEngine.Random.Range(0, 7) == 0){
                         // Attack
                         StartCoroutine(SwingAttack());
                     }
@@ -110,7 +111,6 @@ namespace ToiletLeechIsReal {
 
         public override void OnCollideWithPlayer(Collider other)
         {
-            // Also I think there is a better way to do this logging thing, but idk how.
             myLogSource.LogInfo("Toilet Leech Collision");
             if (timeSinceHittingLocalPlayer < 1f)
             {
@@ -129,6 +129,9 @@ namespace ToiletLeechIsReal {
         IEnumerator SwingAttack(){
             StalkPos = targetPlayer.transform.position;
             yield return new WaitForSeconds(0.5f);
+            if(isEnemyDead){
+                yield break;
+            }
             creatureAnimator.SetTrigger("swingAttack");
             myLogSource.LogInfo($"swingAttack animation");
             yield return new WaitForSeconds(0.24f);
@@ -155,7 +158,9 @@ namespace ToiletLeechIsReal {
             enemyHP -= force;
             if (IsOwner) {
                 if (enemyHP <= 0) {
-                    //creatureAnimator.SetTrigger("Killed");
+                    creatureVoice.Stop();
+                    creatureAnimator.SetTrigger("setDie");
+                    // Our death sound will be played through creatureVoice when KillEnemy() is called
                     KillEnemyOnOwnerClient();
                     return;
                 }

@@ -81,7 +81,7 @@ MonoBehaviour:
   loudnessMultiplier: 0
   overrideVentSFX: {fileID: 0}
   hitBodySFX: {fileID: 0}
-  hitEnemyVoiceSFX: {fileID: 0}
+  hitEnemyVoiceSFX: {fileID: 8300000, guid: 509a796b32c100191839545e866e8a9c, type: 3}
   deathSFX: {fileID: 0}
   stunSFX: {fileID: 0}
   miscAnimations: []

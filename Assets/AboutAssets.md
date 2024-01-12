@@ -9,7 +9,7 @@ While this is still a Work In Progress, I hope it will be useful!
 The contents in this directory are not directly used during the building process, and are excluded in the csproj file.  
 In the assets folder, you will find a folder “UnityProject”. This unity project file contains everything needed, and we use Unity 2022.3.9f1 to build an asset bundle named "toiletleech", using the accompanying file "toiletleech.manifest". 
 
-All of the software used in this process is available for free download on both Windows and Linux. However, on Linux, it is possible that Unity 2022.3.9f1 might output sounds into the wrong place, which is a known bug in Unity. I don't know a solution for this, but if you don't hear anything in the Unity editor, this might be the issue. Fortunately, the sounds should still work once the asset bundle is exported and the game is launched with your new mod enabled.
+All of the software used in this process is available for free download on both Windows and Linux. However, on Linux, Unity 2022.3.9f1 has a bug where might output audio to the wrong output. If this happens, you can try using [pavucontrol](https://flathub.org/apps/org.pulseaudio.pavucontrol) to change Unity's audio output (appears as `FMOD Ex App`) to the correct one.
 
 ## Blender
 

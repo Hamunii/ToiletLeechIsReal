@@ -59,6 +59,14 @@ If this doesn't fix the problem after importing to Unity, you likely have resize
 
 // TODO: add more resources
 
+### Animation - Common Issues
+
+**Objects in Model appear in different places as in Blender when exporting to Unity.**
+This might be because you have directly animated an object, instead of an armature. Try parenting your object to an armature and remake your animation with that.
+
+**Animations are broken in Unity.**
+This might be because you have animations with the same name in your NLA editor. Make sure your animations have unique names.
+
 ### Exporting Assets For Unity
 
 > [!IMPORTANT]
