@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 369302491335421512}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 1.9}
+  m_LocalPosition: {x: 0, y: 1.5, z: 1.8}
   m_LocalScale: {x: 3, y: 3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,7 +76,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 40248eaf708e242598b42c12c9adc3ed, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -84,10 +84,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 4
-  MaxDistance: 50
+  MinDistance: 5
+  MaxDistance: 25
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -486,10 +486,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 4
-  MaxDistance: 50
+  MinDistance: 5
+  MaxDistance: 25
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -794,10 +794,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7880820548992749185}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a1e2332a3393d644ad5771fda990784,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7324164540250487759}
   m_SourcePrefab: {fileID: 100100000, guid: 3a1e2332a3393d644ad5771fda990784, type: 3}
 --- !u!1 &4653223892326777022 stripped
 GameObject:
@@ -853,7 +849,7 @@ MonoBehaviour:
   thisNetworkObject: {fileID: 0}
   thisEnemyIndex: 0
   isClientCalculatingAI: 0
-  updatePositionThreshold: 1
+  updatePositionThreshold: 0.4
   targetPlayer: {fileID: 0}
   movingTowardsTargetPlayer: 0
   moveTowardsDestination: 0
@@ -865,7 +861,7 @@ MonoBehaviour:
   ventAnimationFinished: 0
   isEnemyDead: 0
   daytimeEnemyLeaving: 0
-  enemyHP: 3
+  enemyHP: 4
   openDoorSpeedMultiplier: 0
   useSecondaryAudiosOnAnimatedObjects: 0
   currentSearch:
@@ -970,20 +966,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7324164540250487759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4653223892326777022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
-  m_Animator: {fileID: 0}
 --- !u!4 &5465191632302234116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3a1e2332a3393d644ad5771fda990784,
