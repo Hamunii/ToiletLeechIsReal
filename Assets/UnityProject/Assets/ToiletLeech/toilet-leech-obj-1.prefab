@@ -785,15 +785,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a1e2332a3393d644ad5771fda990784,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5968074885591470640}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a1e2332a3393d644ad5771fda990784,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2678341756808545533}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a1e2332a3393d644ad5771fda990784,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5968074885591470640}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a1e2332a3393d644ad5771fda990784,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 7880820548992749185}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a1e2332a3393d644ad5771fda990784,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7324164540250487759}
   m_SourcePrefab: {fileID: 100100000, guid: 3a1e2332a3393d644ad5771fda990784, type: 3}
 --- !u!1 &4653223892326777022 stripped
 GameObject:
@@ -849,13 +853,13 @@ MonoBehaviour:
   thisNetworkObject: {fileID: 0}
   thisEnemyIndex: 0
   isClientCalculatingAI: 0
-  updatePositionThreshold: 0
+  updatePositionThreshold: 1
   targetPlayer: {fileID: 0}
   movingTowardsTargetPlayer: 0
   moveTowardsDestination: 0
   destination: {x: 0, y: 0, z: 0}
   addPlayerVelocityToDestination: 0
-  syncMovementSpeed: 0
+  syncMovementSpeed: 0.22
   timeSinceSpawn: 0
   exitVentAnimationTime: 0
   ventAnimationFinished: 0
@@ -903,26 +907,6 @@ MonoBehaviour:
     searchWidth: 200
     searchPrecision: 25
     randomized: 0
---- !u!114 &5968074885591470640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4653223892326777022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 1
-  AutoObjectParentSync: 1
 --- !u!195 &2678341756808545533
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -945,6 +929,26 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
+--- !u!114 &5968074885591470640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4653223892326777022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 1
+  AutoObjectParentSync: 1
 --- !u!95 &7880820548992749185
 Animator:
   serializedVersion: 5
@@ -966,6 +970,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7324164540250487759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4653223892326777022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 0}
 --- !u!4 &5465191632302234116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3a1e2332a3393d644ad5771fda990784,

@@ -45,5 +45,12 @@
 
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Evaisa.NetcodePatcher.MSBuild" Version="3.*" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
+    <NetcodePatch Include="$(TargetPath)" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties manifest_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 </Project>

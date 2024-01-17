@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BepInEx.Logging;
 using GameNetcodeStuff;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace ToiletLeechIsReal {
@@ -30,6 +31,7 @@ namespace ToiletLeechIsReal {
         Vector3 StalkPos;
         private ManualLogSource myLogSource;
         bool isSearching;
+        System.Random enemyRandom;
 
         public override void Start()
 		{
@@ -41,6 +43,7 @@ namespace ToiletLeechIsReal {
             positionRandomness = new Vector3(0, 0, 0);
             isSearching = false;
             creatureAnimator.SetTrigger("startWalk");
+            enemyRandom = new System.Random(StartOfRound.Instance.randomMapSeed + thisEnemyIndex);
 		}
         public override void Update(){
             base.Update();
@@ -65,6 +68,9 @@ namespace ToiletLeechIsReal {
                 agent.speed = 0f;
                 return;
             }
+            if(!IsOwner){
+                return;
+            }
             if (!isEnemyDead && !StartOfRound.Instance.allPlayersDead)
             {
                 if (TargetClosestPlayer(4f) && Vector3.Distance(transform.position, targetPlayer.transform.position) < 25)
@@ -80,7 +86,7 @@ namespace ToiletLeechIsReal {
                 {
                     if(!isSearching){
                         myLogSource.LogInfo("Stop Target Player");
-                        StartSearch(base.transform.position, scoutingSearchRoutine);
+                        StartSearch(transform.position, scoutingSearchRoutine);
                         isSearching = true;
                         movingTowardsTargetPlayer = false;
                         // This is flawed creatureAnimator logic
@@ -91,14 +97,15 @@ namespace ToiletLeechIsReal {
             if (targetPlayer != null && PlayerIsTargetable(targetPlayer) && !isSearching) {
                 if(timeSinceNewRandPos > 0.7f){
                     timeSinceNewRandPos = 0;
-                    if(UnityEngine.Random.Range(0, 7) == 0){
+                    if(enemyRandom.Next(0, 6) == 0){
                         // Attack
                         StartCoroutine(SwingAttack());
+
                     }
                     else{
                         // In front of player
-                        positionRandomness = new Vector3(UnityEngine.Random.Range(-2, 2f), 0, UnityEngine.Random.Range(-2f, 2f));
-                        StalkPos = targetPlayer.transform.position - Vector3.Scale(new Vector3(-6, 0, -6), targetPlayer.transform.forward) + positionRandomness;
+                        positionRandomness = new Vector3(enemyRandom.Next(-2, 2), 0, enemyRandom.Next(-2, 2));
+                        StalkPos = targetPlayer.transform.position - Vector3.Scale(new Vector3(-5, 0, -5), targetPlayer.transform.forward) + positionRandomness;
                     }
                 }
                 SetDestinationToPosition(StalkPos);
@@ -132,21 +139,10 @@ namespace ToiletLeechIsReal {
             if(isEnemyDead){
                 yield break;
             }
-            creatureAnimator.SetTrigger("swingAttack");
             myLogSource.LogInfo($"swingAttack animation");
+            SwingAttackAnimationClientRPC();
             yield return new WaitForSeconds(0.24f);
-            Collider[] hitColliders = Physics.OverlapBox(attackArea.position, attackArea.localScale, Quaternion.identity, 1 << 3);
-            if(hitColliders.Length > 0){
-                foreach (var player in hitColliders){
-                    PlayerControllerB playerControllerB = MeetsStandardPlayerCollisionConditions(player);
-                    if (playerControllerB != null)
-                    {
-                        myLogSource.LogInfo("Swing attack!!!!");
-                        timeSinceHittingLocalPlayer = 0f;
-                        playerControllerB.DamagePlayer(20);
-                    }
-                }
-            }
+            SwingAttackHitClientRPC();
         }
 
         public override void HitEnemy(int force = 1, PlayerControllerB playerWhoHit = null, bool playHitSFX = false)
@@ -163,6 +159,30 @@ namespace ToiletLeechIsReal {
                     // Our death sound will be played through creatureVoice when KillEnemy() is called
                     KillEnemyOnOwnerClient();
                     return;
+                }
+            }
+        }
+
+        [ClientRpc]
+        public void SwingAttackAnimationClientRPC()
+        {
+            myLogSource.LogInfo("SwingAttackAnimationClientRPC");
+            creatureAnimator.SetTrigger("swingAttack");
+        }
+        [ClientRpc]
+        public void SwingAttackHitClientRPC()
+        {
+            myLogSource.LogInfo("SwingAttackHitClientRPC");
+            Collider[] hitColliders = Physics.OverlapBox(attackArea.position, attackArea.localScale, Quaternion.identity, 1 << 3);
+            if(hitColliders.Length > 0){
+                foreach (var player in hitColliders){
+                    PlayerControllerB playerControllerB = MeetsStandardPlayerCollisionConditions(player);
+                    if (playerControllerB != null)
+                    {
+                        myLogSource.LogInfo("Swing attack!!!!");
+                        timeSinceHittingLocalPlayer = 0f;
+                        playerControllerB.DamagePlayer(20);
+                    }
                 }
             }
         }
