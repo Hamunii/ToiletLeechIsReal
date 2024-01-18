@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 1619644037
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 22305c2d04b83f828a87a599f34f374d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8d260c6ed444a9bb07d2045c1af61fac
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 22305c2d04b83f828a87a599f34f374d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 196
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/main.unity
+Dependencies: []

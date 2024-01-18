@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 3224124000
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: modassets
+      Dependencies: {}
+    Info_1:
+      Name: toiletleech
+      Dependencies: {}

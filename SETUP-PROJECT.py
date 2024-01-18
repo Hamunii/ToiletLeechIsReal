@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import shutil
-import sys
+from inspect import getsourcefile
 
 # This is an automated script for copying required dll files into this project.
 # Supports both Windows* and Linux.
@@ -24,7 +24,7 @@ def exitProgram():
    exit()
 
 def copyDLLs(sourceDir: str, destinationDir: str, dllList: list) -> bool:
-   if os.path.exists(sourceDir):
+   if os.path.exists(fr'{sourceDir}'):
       for dllFile in dllList:
          shutil.copy2(f'{sourceDir}/{dllFile}', f'{destinationDir}/{dllFile}')
          print(f'Got: {dllFile}')
@@ -32,9 +32,9 @@ def copyDLLs(sourceDir: str, destinationDir: str, dllList: list) -> bool:
    return False
 
 # Locate our dlls directory in this repo
-thisPath = os.path.dirname(os.path.realpath(sys.argv[0]))
+thisPath = os.path.dirname(os.path.realpath(getsourcefile(lambda:0)))
 dllsRelative = 'dlls'
-dllDestination = f'{thisPath}/{dllsRelative}'
+dllDestination = f'{thisPath}/Plugin/{dllsRelative}'
 if not os.path.exists(dllDestination):
    print(color.red + f'Setup script could not find path: {dllDestination}.{color.yellow}\nMake sure you run this script from the root of the repo directory.')
    exitProgram()
@@ -66,7 +66,7 @@ copyDLLs(f'{gameFilesPath}/{gameDataRelative}', dllDestination, neededGameDllFil
 print(color.green + f'Done copying to {dllDestination}!' + color.reset)
 
 # Make sure our Unity project still exists
-unityProjectPath = f'{thisPath}/Assets/UnityProject'
+unityProjectPath = f'{thisPath}/UnityProject'
 unityPluginsRelative = 'Assets/Plugins'
 if not os.path.exists(unityProjectPath):
    print(color.yellow + f'Could not find Unity project at {unityProjectPath}! Paste the full path to your Unity project:' + color.reset)
@@ -133,8 +133,10 @@ gotCoreFiles = None
 gotMMHOOKFiles = None
 if r2modmanPath is not None:
    for dir in os.listdir(r2modmanPath):
-      gotCoreFiles = copyDLLs(f'{r2modmanPath}/{dir}/BepInEx/core', f'{unityProjectPath}/{unityPluginsRelative}', neededCoreDlls)
-      gotMMHOOKFiles = copyDLLs(f'{r2modmanPath}/{dir}/Plugins/MMHOOK', f'{unityProjectPath}/{unityPluginsRelative}', neededMMHOOKDlls)
+      if not gotCoreFiles:
+         gotCoreFiles = copyDLLs(f'{r2modmanPath}/{dir}/BepInEx/core', f'{unityProjectPath}/{unityPluginsRelative}', neededCoreDlls)
+      if not gotMMHOOKFiles:
+         gotMMHOOKFiles = copyDLLs(f'{r2modmanPath}/{dir}/Plugins/MMHOOK', f'{unityProjectPath}/{unityPluginsRelative}', neededMMHOOKDlls)
 
 # Testing against non-r2modman installation if the mods exist there
 if not gotCoreFiles:
@@ -142,6 +144,8 @@ if not gotCoreFiles:
 
 if not gotMMHOOKFiles:
       gotMMHOOKFiles = copyDLLs(f'{gameFilesPath}/BepInEx/Plugins/MMHOOK', f'{unityProjectPath}/{unityPluginsRelative}', neededMMHOOKDlls)
+if not gotMMHOOKFiles:
+      gotMMHOOKFiles = copyDLLs(f'{gameFilesPath}/BepInEx/plugins/MMHOOK', f'{unityProjectPath}/{unityPluginsRelative}', neededMMHOOKDlls)
 
 if not gotCoreFiles:
    print(color.red + f"No BepInEx/core directory found! If you have no mod manager for Lethal Company, please install r2modman or setup BepInEx for Lethal Company manually.\n"
@@ -151,7 +155,8 @@ if not gotCoreFiles:
    if not gotCoreFiles:
       exitProgram()
    print(color.lightblue + f'BepInEx/core found: {userInputBepInExPath}/core' + color.reset)
-   gotMMHOOKFiles = copyDLLs(f'{userInputBepInExPath}/Plugins/MMHOOK', f'{unityProjectPath}/{unityPluginsRelative}', neededMMHOOKDlls)
+   if not gotMMHOOKFiles:
+      gotMMHOOKFiles = copyDLLs(f'{userInputBepInExPath}/Plugins/MMHOOK', f'{unityProjectPath}/{unityPluginsRelative}', neededMMHOOKDlls)
 
 if not gotMMHOOKFiles:
    print(color.red + f"No MMHOOK directory found! These DLL files are needed for our LethalLib dependency.\nPlease do the following to fix this:\n"

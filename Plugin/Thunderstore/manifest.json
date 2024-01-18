@@ -1,0 +1,7 @@
+{
+    "name": "ToiletLeechIsReal",
+    "version_number": "0.1.0",
+    "website_url": "https://github.com/Hamunii/ToiletLeechIsReal",
+    "description": "This revolutionary mod makes the Toilet Leech enemy real.",
+    "dependencies": ["BepInEx-BepInExPack-5.4.2100", "Evaisa-LethalLib-0.1.3"]
+}
