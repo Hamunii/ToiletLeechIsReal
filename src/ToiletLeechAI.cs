@@ -13,7 +13,8 @@ namespace ToiletLeechIsReal {
     // Asset bundles cannot contain scripts, so our script lives here. It is important to get the
     // reference right, or else it will not find this file. TODO: explain how to do the reference right.
 
-    // Also, I have no idea if this syncs well on multiplayer.
+    // WARNING: THIS IS TERRIBLE CODE. Basically, I just got this stuff working so I've not yet had time
+    // to worry about making it not suck. Feel free to fix it while I work on updating the guide lol
 
     // For reference, see EnemyAI with a decompiler. Also stuff like BlobAI is good to check too.
 

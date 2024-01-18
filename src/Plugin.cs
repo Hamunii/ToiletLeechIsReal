@@ -25,26 +25,6 @@ namespace ToiletLeechIsReal {
             // Is this the most efficient way of printing ascii art? Maybe not, but it'll do.
             // Also, it would be funny if the toilet leech said something random, with speech bubbles!
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
-            Logger.LogInfo("");
-            Logger.LogInfo("             ▓█▒▒▓▓▓▓                   ");
-            Logger.LogInfo("          ▒▒█▓▒▓█▓████▓  ▒▒▒▓           ");
-            Logger.LogInfo("         █▒▒▒▓▓█▓████▓▓▓▒▒▒▒▒▒▓▓▓       ");
-            Logger.LogInfo("          ▒▒█▒▓███ ▓▓▓▓▓▓▒▒▒▒▒▓██       ");
-            Logger.LogInfo("         ▓▒▒▒▓███  ▓▓▓▓▓▓█▒▒▒▒▓██       ");
-            Logger.LogInfo("          ▓▓▓██    ▓▓▓▓▓▓█▒▒▒▒▓██       ");
-            Logger.LogInfo("          █        ▓▓▓▓▓▓█▒▒▒▒██        ");
-            Logger.LogInfo("                  ▓▓▓▓▓▓██▓▒▒▓██        ");
-            Logger.LogInfo("           ▒▒▒▒▓▓▒▒▒▒▓▓▓▓███   ▓▒▓      ");
-            Logger.LogInfo("         ▒▒▒▒▒▓▓▓▓▓▓▓▓▓████▒▒▒▒▓▓▒▓▓▓   ");
-            Logger.LogInfo("         ▒▒▒█▓▒▓▓▓█▓▒▒▒▒▓█▒▒▓▓▓▒▒██▓▓██ ");
-            Logger.LogInfo("        ▓▒▓█▓▓████▓▒▓▒▒▒██▓█▓ █▓▒▒█▓▓█  ");
-            Logger.LogInfo("        ▒▓▓▓▓▓█   ▓▒▓▒▓▓██▓█   ▓▓▓▓▓▓█  ");
-            Logger.LogInfo("        ▓█▓█▓▓██  █▒▒▒▒▓▓     ▓▓▓▒▓█▓▓  ");
-            Logger.LogInfo("       ▓▒▓▓▓       ▓▒▒▒▒▒█     ▒▒▒▓██▓▓█");
-            Logger.LogInfo("      ▒▒▒▒▒▓▓      ▓▓▒▓▓▓██    ▒▒▒▓▓▓   ");
-            Logger.LogInfo("                    ▓▓▓▓▓█     █▓▒▒▓█   ");
-            Logger.LogInfo("                   █▒▒▒▒▒▓▓█            ");
-            Logger.LogInfo("");
 
             _harmony = new Harmony(PluginInfo.PLUGIN_GUID);
             _harmony.PatchAll(typeof(Patches));
