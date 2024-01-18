@@ -69,9 +69,6 @@ This might be because you have animations with the same name in your NLA editor.
 
 ### Exporting Assets For Unity
 
-> [!IMPORTANT]
-> You might or might not need to apply All Transforms of your 3D Model by hovering your cursor over 3D Viewport and doing `Ctrl+A` -> `All Transforms` for your model to appear in Unity as it does in Blender. Contributions to this guide are welcome.
-
 To export your model, go to: `File` -> `Export` -> `FBX (.fbx)`  
 This will open our FBX exporter window, where we have some options available to us. The most important thing here however is the transform section. Because of the differences in Blender's and Unity's coordinate systems, exporting your model is not quite as straight-forward as you'd think. It's very easy to get your model pointing in the wrong direction, being sideways, or even upside down if you don't have correct values set.
 
