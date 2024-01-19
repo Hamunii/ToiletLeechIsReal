@@ -75,7 +75,7 @@ crashlytics-build.properties
 .vscode/
 
 # Assemblies
-*.dll
+# *.dll
 
 # We allow these dll files because we have the right to redistribute them
 !/[Aa]ssets/Plugins/ToiletLeechIsReal.dll
