@@ -74,6 +74,9 @@ crashlytics-build.properties
 # Idk why this wasn't on the list
 .vscode/
 
+# Assemblies
+*.dll
+
 # We allow these dll files because we have the right to redistribute them
 !/[Aa]ssets/Plugins/ToiletLeechIsReal.dll
 !/[Aa]ssets/Plugins/LethalLib.dll
