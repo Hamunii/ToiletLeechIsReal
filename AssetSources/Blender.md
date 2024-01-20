@@ -75,4 +75,4 @@ This will open our FBX exporter window, where we have some options available to 
 Even I don't understand how any it really works, but our model points in the negative Z direction, and in the transfrom section, we have set `Forward` to `-Z Forward`, and `Up` to `Y Up` and our model appears correctly in Unity.  
 ![Screenshot: Export as FBX Settings](./ForTutorial/BlenderExportAsFBX.png)
 
-**Next: [Unity page](./Unity.md)**
+**Pages: [Unity](./Unity.md) | [Coding AI](./CodingAI.md)**

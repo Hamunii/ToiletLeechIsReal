@@ -42,18 +42,10 @@ We also depend on LethalLib by Evaisa (which is already included in the project)
 
 The dll file of this mod also needs to be there so we can reference ToiletLeechAI from a component of the Toilet Leech prefab in Unity. It needs to be from the dll file, you cannot just copy and paste the ToiletLeechAI.cs file in the Unity project because asset bundles cannot contain scripts, and it just doesn't get the reference otherwise. You know it doesn't get the reference in the form of a yellow warning text if you launch the game with the mod and you have unity logging enabled in the `BepInEx.cfg` file.
 
-### What Are Asset Bundles?
-
-> https://docs.unity3d.com/Manual/AssetBundlesIntro.html  
-An AssetBundle is an archive file that contains platform-specific non-code Assets (such as Models, Textures, Prefabs, Audio clips, and even entire Scenes) that Unity can load at run time. AssetBundles can express dependencies between each other; for example, a Material in one AssetBundle can reference a Texture in another AssetBundle. For efficient delivery over networks, you can compress AssetBundles with a choice of built-in algorithms depending on use case requirements (LZMA and LZ4).
->
-> AssetBundles can be useful for downloadable content (DLC), reducing initial install size, loading assets optimized for the end-user’s platform, and reduce runtime memory pressure.
->
-> Note: An AssetBundle can contain the serialized data of an instance of a code object, such as a ScriptableObject. However, the class definition itself is compiled into one of the Project assemblies. When you load a serialized object in an AssetBundle, Unity finds the matching class definition, creates an instance of it, and sets that instance’s fields using the serialized values. This means that you can introduce new items to your game in an AssetBundle as long as those items do not require any changes to your class definitions.
-
-Asset bundles are a way for us to basically transfer our enemy from our Unity project to Lethal Company.
-
 ### Our Toilet Leech Assets In Unity
+
+> [!INFO]
+> The way we figure out how enemies are configured in Unity is done by looking at the Asset Ripper's Unity project output of the game files. You can use [AssetRipper Guid Patcher](https://github.com/ChrisFeline/AssetRipperGuidPatcher) to get a Unity project based on the game files!
 
 We have made a ToiletLeech folder in our Unity project. Everything that goes into our asset bundle is in there.
 The first thing we did was import our fbx model into Unity. This is as simple as dragging our fbx file into our assets, or right clicking and choosing `Import New Asset...` and choosing our fbx file. The exported fbx model contains all our materials, textures and animations when first imported, but it is good to separate some of that stuff into their own folders. We have extracted our materials into the `Materials` folder.
@@ -67,13 +59,16 @@ The EnemyType ScriptableObject has some configuration options, and the most impo
 
 ### The Toilet Leech Prefab
 
+> [!INFO]
+> If you don't know what prefabs are, see https://docs.unity3d.com/Manual/Prefabs.html
+
 We have added these components to our prefab for everything to work properly:  
 ![Screenshot: Toilet Leech Prefab in inspector](./ForTutorial/ToiletLeechPrefabInspector.png)
 
 1. Toilet Leech AI (Script)
     - This script can be found in `src/ToiletLeechAI.cs` at the root of this repository, and has been referenced from our build dll file in the Unity project so our prefab can recognize it as the same script. We have configuration options on Unity side that come from the `EnemyAI` class, as our AI class inherits from that.
 2. Network Object
-    - Needs to be added so our enemy works fine on multiplayer, or something like that. After you reference your AI script, Unity will automatically prompt you to add this component.
+    - Needs to be added so our enemy's position can sync in multiplayer. After you reference your AI script, Unity will automatically prompt you to add this component.
 3. Nav Mesh Agent
     - Allows our enemy to act as a nav mesh agent, which is Unity's system for making easy pathfinding in 3D with the help of a nav mesh that the agents walk on.
 4. Animator
@@ -88,6 +83,16 @@ We also have these as children of the prefab itself:
     - Allows us to scan the enemy. Make sure the following is set: Tag: `DoNotSet`, Layer: `ScanNode`
 2. MapDot
     - Allows us to see the enemy on map. Make sure the following is set: Tag: `DoNotSet`, Layer: `MapRadar`
+3. Collision
+    - Has the following components: Enemy AI Collision Detect (Script) & Box Collider with `isTrigger: true`
+4. TurnCompass
+    - Does nothing by itself, but we have a reference to this in the ToiletLeechAI.cs script to make the enemy looking at player a bit easier.
+5. AttackArea
+    - Does nothing by itself, but we take its position and scale and check if the player exists inside that area for the head swing attack.
+6. CreatureSFX
+    - We play the creature sound effects through this.
+7. CreatureVoice
+    - We play the creature's voice through this.
 
 ### Toilet Leech Terminal Entry
 
@@ -102,6 +107,17 @@ The enemy spinning animation on the beastiary entry background is a video file, 
 
 > [!IMPORTANT]  
 > Unity Editor on Linux has [bad support for video files](https://docs.unity3d.com/Manual/VideoSources-FileCompatibility.html), so if you are using Linux, you might want to [encode your video to VP8 using FFmpeg](https://trac.ffmpeg.org/wiki/Encode/VP8). Unfortunately, Blender does not have an option to encode to VP8.
+
+### What Are Asset Bundles?
+
+> https://docs.unity3d.com/Manual/AssetBundlesIntro.html  
+An AssetBundle is an archive file that contains platform-specific non-code Assets (such as Models, Textures, Prefabs, Audio clips, and even entire Scenes) that Unity can load at run time. AssetBundles can express dependencies between each other; for example, a Material in one AssetBundle can reference a Texture in another AssetBundle. For efficient delivery over networks, you can compress AssetBundles with a choice of built-in algorithms depending on use case requirements (LZMA and LZ4).
+>
+> AssetBundles can be useful for downloadable content (DLC), reducing initial install size, loading assets optimized for the end-user’s platform, and reduce runtime memory pressure.
+>
+> Note: An AssetBundle can contain the serialized data of an instance of a code object, such as a ScriptableObject. However, the class definition itself is compiled into one of the Project assemblies. When you load a serialized object in an AssetBundle, Unity finds the matching class definition, creates an instance of it, and sets that instance’s fields using the serialized values. This means that you can introduce new items to your game in an AssetBundle as long as those items do not require any changes to your class definitions.
+
+Asset bundles are a way for us to basically transfer our enemy from our Unity project to Lethal Company.
 
 ### Adding Things To An Asset Bundle
 
@@ -121,4 +137,4 @@ To add a thing to an asset bundle, you first need to select the object you want 
 > [!NOTE]  
 > If you don't have Windows standalone build support installed in your Unity installation, close unity and install it from Unity Hub. I'm not 100% sure if this is actually needed, but I had no luck getting the materials of the model working in the asset bundle when I had my build target set to Linux, which I didn't realize could affect anything.
 
-// TODO: write the rest
+**Pages: [Blender](./Blender.md) | [Coding AI](./CodingAI.md)**

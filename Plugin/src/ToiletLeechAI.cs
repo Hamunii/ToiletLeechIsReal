@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using BepInEx.Logging;
 using GameNetcodeStuff;
 using Unity.Netcode;
@@ -90,7 +88,7 @@ namespace ToiletLeechIsReal {
                         StopSearch(scoutingSearchRoutine);
                         isSearching = false;
                         movingTowardsTargetPlayer = true;
-                        moveTowardsDestination = false;
+                        moveTowardsDestination = false; // I should probably remove this line
                     }
                 }
                 else
@@ -100,7 +98,7 @@ namespace ToiletLeechIsReal {
                         StartSearch(transform.position, scoutingSearchRoutine);
                         isSearching = true;
                         movingTowardsTargetPlayer = false;
-                        moveTowardsDestination = true;
+                        moveTowardsDestination = true; // And also this
                     }
                     
                 }

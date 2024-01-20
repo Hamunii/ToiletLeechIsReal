@@ -19,11 +19,10 @@ namespace ToiletLeechIsReal {
             var tlTerminalNode = Assets.MainAssetBundle.LoadAsset<TerminalNode>("ToiletLeechTN");
             var tlTerminalKeyword = Assets.MainAssetBundle.LoadAsset<TerminalKeyword>("ToiletLeechTK");
             
+            // Network Prefabs need to be registered first. See https://docs-multiplayer.unity3d.com/netcode/current/basics/object-spawning/
             NetworkPrefabs.RegisterNetworkPrefab(toiletLeech.enemyPrefab);
 			RegisterEnemy(toiletLeech, 100, LevelTypes.All, SpawnType.Outside, tlTerminalNode, tlTerminalKeyword);
-
-            // Is this the most efficient way of printing ascii art? Maybe not, but it'll do.
-            // Also, it would be funny if the toilet leech said something random, with speech bubbles!
+            
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
 
             _harmony = new Harmony(PluginInfo.PLUGIN_GUID);
