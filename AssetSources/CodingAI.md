@@ -34,7 +34,7 @@ public virtual void DoAIInterval()
         // agent is the Nav Mesh Agent attached to our prefab
         agent.SetDestination(destination);
     }
-    // Updates serverPosition to current enemy position on server, if distance from
+    // Updates serverPosition to current enemy position on server if distance from
     // serverPosition to current position is above updatePositionThreshold, which we set
     // in our custom AI script in Unity.
     SyncPositionToClients();
