@@ -48,5 +48,5 @@ After copying this repo for yourself, run [SETUP-PROJECT.py](/SETUP-PROJECT.py) 
 
 ### Credits
 
-Evaisa - https://github.com/EvaisaDev/LethalCompanyUnityTemplate
+Evaisa - https://github.com/EvaisaDev/LethalCompanyUnityTemplate  
 Bug issue template taken and modified from https://github.com/LethalModding/Radar_Ident_QuickSwitch
