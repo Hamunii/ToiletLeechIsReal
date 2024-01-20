@@ -5,7 +5,13 @@
 >
 > Also, check the resources at the bottom of this page!
 
-### Abstract class EnemyAI
+### Tips For Testing Your Mod
+
+You can directly open the game's exe file, and this will allow you to open two instances and test multiplayer in LAN mode. This also opens the game slightly faster than through steam.
+
+You can also use external mods to spawn the enemy for testing. I don't know one right now that works fine on v49. If you have any suggestions, feel free to open an issue or something. Alternatively, you could implement testing functionality in your mod directly.
+
+### Abstract Class EnemyAI
 
 Every enemy in Lethal Company inherits from the EnemyAI class, so we do the same.
 
@@ -45,7 +51,7 @@ As we can see, the enemy updates its destination when `moveTowardsDestination` i
 
 The `OnCollideWithPlayer()` method will run when an object with a trigger collider and the Enemy AI Collision Detect (Script). This is also the collider we can hit with a shovel, and we need to implement `HitEnemy()` for our enemy to be able to take damage and die.
 
-### Using Random without desync
+### Using Random Without Desync
 
 We can implement our own random variable which we initialize with a set seed in our `Start()` method, and use it like this:
 ```cs

@@ -31,13 +31,6 @@
 	</ItemGroup>
 
   <ItemGroup>
-  <Content Remove="Assets\**" />
-  <Compile Remove="Assets\**" />
-  <EmbeddedResource Remove="Assets\**" />
-  <None Remove="Assets\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="UnityEngine"><HintPath>../dlls/UnityEngine.CoreModule.dll</HintPath></Reference>
     <Reference Include="Assembly-CSharp"><HintPath>../dlls/Assembly-CSharp.dll</HintPath></Reference>
     <Reference Include="Unity.Netcode.Runtime"><HintPath>../dlls/Unity.Netcode.Runtime.dll</HintPath></Reference>
