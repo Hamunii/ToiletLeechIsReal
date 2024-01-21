@@ -5,6 +5,7 @@ using HarmonyLib;
 using LethalLib.Modules;
 using static LethalLib.Modules.Levels;
 using static LethalLib.Modules.Enemies;
+using System;
 
 namespace ToiletLeechIsReal {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
@@ -24,9 +25,6 @@ namespace ToiletLeechIsReal {
 			RegisterEnemy(toiletLeech, 100, LevelTypes.All, SpawnType.Outside, tlTerminalNode, tlTerminalKeyword);
             
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
-
-            _harmony = new Harmony(PluginInfo.PLUGIN_GUID);
-            _harmony.PatchAll(typeof(Patches));
 
             // Required by https://github.com/EvaisaDev/UnityNetcodePatcher maybe?
             var types = Assembly.GetExecutingAssembly().GetTypes();

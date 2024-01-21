@@ -6,19 +6,17 @@ using UnityEngine;
 
 namespace ToiletLeechIsReal {
 
-    // You may be wondering, how does the Toilet Leech know it is from class ToiletLeechAI?
+    // You may be wondering, how does the Toilet Leech enemy know it is from class ToiletLeechAI?
     // Well, we give it a reference to to this class in the Unity project where we make the asset bundle.
     // Asset bundles cannot contain scripts, so our script lives here. It is important to get the
-    // reference right, or else it will not find this file. TODO: explain how to do the reference right.
+    // reference right, or else it will not find this file. See the guide for more information.
 
-    // WARNING: THIS IS TERRIBLE CODE. Basically, I just got this stuff working so I've not yet had time
-    // to worry about making it not suck. Feel free to fix it while I work on updating the guide lol
-
-    // For reference, see EnemyAI with a decompiler. Also stuff like BlobAI is good to check too.
+    // For additional info on coding your AI, see ../../AssetSources/CodingAI.md
 
     class ToiletLeechAI : EnemyAI {
 
-        // We set these in our Asset Bundle, so we can disable warning CS0649
+        // We set these in our Asset Bundle, so we can disable warning CS0649:
+        // Field 'field' is never assigned to, and will always have its default value 'value'
         #pragma warning disable 0649
         public Transform turnCompass;
         public Transform attackArea;
@@ -29,9 +27,13 @@ namespace ToiletLeechIsReal {
         Vector3 positionRandomness;
         Vector3 StalkPos;
         private ManualLogSource myLogSource;
-        bool isSearching;
         System.Random enemyRandom;
         bool isDeadAnimationDone;
+        enum TLBehavior {
+            SearchingForPlayer,
+            StickingInFrontOfPlayer,
+            HeadSwingAttackInProgress,
+        }
 
         public override void Start()
 		{
@@ -42,10 +44,13 @@ namespace ToiletLeechIsReal {
             creatureAnimator.SetTrigger("startWalk");
             timeSinceNewRandPos = 0;
             positionRandomness = new Vector3(0, 0, 0);
-            isSearching = false;
             enemyRandom = new System.Random(StartOfRound.Instance.randomMapSeed + thisEnemyIndex);
             isDeadAnimationDone = false;
+            // NOTE: Add your behavior states in your enemy script in Unity, where you can configure fun stuff
+            // like a voice clip or an sfx clip to play when changing to that specific behavior state.
+            currentBehaviourStateIndex = (int)TLBehavior.SearchingForPlayer;
 		}
+
         public override void Update(){
             base.Update();
             if(isEnemyDead){
@@ -60,86 +65,87 @@ namespace ToiletLeechIsReal {
             }
             timeSinceHittingLocalPlayer += Time.deltaTime;
             timeSinceNewRandPos += Time.deltaTime;
-            if(targetPlayer != null && PlayerIsTargetable(targetPlayer) && !isSearching){
+            if(targetPlayer != null && PlayerIsTargetable(targetPlayer) && !scoutingSearchRoutine.inProgress){
                 turnCompass.LookAt(targetPlayer.gameplayCamera.transform.position);
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0f, turnCompass.eulerAngles.y, 0f)), 3f * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0f, turnCompass.eulerAngles.y, 0f)), 4f * Time.deltaTime);
             }
             if (stunNormalizedTimer > 0f)
             {
                 agent.speed = 0f;
             }
-            // myLogSource.LogInfo($"Time: {timeSinceNewRandPos}");
         }
 
         public override void DoAIInterval()
         {
             base.DoAIInterval();
-            if (isEnemyDead)
-            {
-                agent.speed = 0f;
+            if (isEnemyDead || StartOfRound.Instance.allPlayersDead) {
                 return;
             }
-            if (!isEnemyDead && !StartOfRound.Instance.allPlayersDead)
-            {
-                if (TargetClosestPlayer(4f) && Vector3.Distance(transform.position, targetPlayer.transform.position) < 25)
-                {
-                    if(isSearching){
-                        myLogSource.LogInfo("Target Player");
-                        StopSearch(scoutingSearchRoutine);
-                        isSearching = false;
-                        movingTowardsTargetPlayer = true;
-                        moveTowardsDestination = false; // I should probably remove this line
-                    }
-                }
-                else
-                {
-                    if(!isSearching){
-                        myLogSource.LogInfo("Stop Target Player");
-                        StartSearch(transform.position, scoutingSearchRoutine);
-                        isSearching = true;
-                        movingTowardsTargetPlayer = false;
-                        moveTowardsDestination = true; // And also this
-                    }
-                    
-                }
-            }
-            if (targetPlayer != null && PlayerIsTargetable(targetPlayer) && !isSearching) {
-                if(timeSinceNewRandPos > 0.7f && IsOwner){
-                    timeSinceNewRandPos = 0;
-                    if(enemyRandom.Next(0, 5) == 0){
-                        // Attack
-                        StartCoroutine(SwingAttack());
-                    }
-                    else{
-                        // In front of player
-                        positionRandomness = new Vector3(enemyRandom.Next(-2, 2), 0, enemyRandom.Next(-2, 2));
-                        StalkPos = targetPlayer.transform.position - Vector3.Scale(new Vector3(-5, 0, -5), targetPlayer.transform.forward) + positionRandomness;
-                    }
-                    SetDestinationToPosition(StalkPos);
-                }
-                agent.speed = 5f;
-            }
-            else{
-                agent.speed = 3f;
+            // Sets scoutingSearchRoutine.inProgress to True if serching, False if found player
+            // Will set targetPlayer to the closest player
+            KeepSearchingForPlayerUnlessInRange(25, ref scoutingSearchRoutine);
+
+            switch(currentBehaviourStateIndex) {
+                case (int)TLBehavior.SearchingForPlayer:
+                    agent.speed = 3f;
+                    break;
+                case (int)TLBehavior.StickingInFrontOfPlayer:
+                    agent.speed = 5f;
+                    StickingInFrontOfPlayer();
+                    break;
+                case (int)TLBehavior.HeadSwingAttackInProgress:
+                    // We don't care about doing anything here
+                    break;
+                default:
+                    myLogSource.LogWarning("This Behavior State doesn't exist!");
+                    break;
             }
         }
 
-        public override void OnCollideWithPlayer(Collider other)
-        {
-            if (timeSinceHittingLocalPlayer < 1f)
+        void KeepSearchingForPlayerUnlessInRange(float range, ref AISearchRoutine routine){
+            TargetClosestPlayer();
+            if (targetPlayer != null && Vector3.Distance(transform.position, targetPlayer.transform.position) <= range)
             {
+                if(routine.inProgress){
+                    myLogSource.LogInfo("Start Target Player");
+                    StopSearch(routine);
+                    SwitchToBehaviourClientRpc((int)TLBehavior.StickingInFrontOfPlayer);
+                }
+            }
+            else
+            {
+                if(!routine.inProgress){
+                    myLogSource.LogInfo("Stop Target Player");
+                    StartSearch(transform.position, routine);
+                    SwitchToBehaviourClientRpc((int)TLBehavior.SearchingForPlayer);
+                }
+            }
+        }
+
+        void StickingInFrontOfPlayer(){
+            // We only run this method for the host because I'm paranoid about randomness not syncing I guess
+            // This is fine because the game does sync the position of the enemy.
+            // Also the attack is a ClientRpc so it should always sync
+            if (targetPlayer == null || !IsOwner) {
                 return;
             }
-            PlayerControllerB playerControllerB = MeetsStandardPlayerCollisionConditions(other);
-            if (playerControllerB != null)
-            {
-                myLogSource.LogInfo("Toilet Leech Collision with Player!");
-                timeSinceHittingLocalPlayer = 0f;
-                playerControllerB.DamagePlayer(20);
+            if(timeSinceNewRandPos > 0.7f){
+                timeSinceNewRandPos = 0;
+                if(enemyRandom.Next(0, 5) == 0){
+                    // Attack
+                    StartCoroutine(SwingAttack());
+                }
+                else{
+                    // Go in front of player
+                    positionRandomness = new Vector3(enemyRandom.Next(-2, 2), 0, enemyRandom.Next(-2, 2));
+                    StalkPos = targetPlayer.transform.position - Vector3.Scale(new Vector3(-5, 0, -5), targetPlayer.transform.forward) + positionRandomness;
+                }
+                SetDestinationToPosition(StalkPos);
             }
         }
 
         IEnumerator SwingAttack(){
+            SwitchToBehaviourClientRpc((int)TLBehavior.HeadSwingAttackInProgress);
             StalkPos = targetPlayer.transform.position;
             SetDestinationToPosition(StalkPos);
             yield return new WaitForSeconds(0.5f);
@@ -149,6 +155,25 @@ namespace ToiletLeechIsReal {
             DoAnimationClientRpc("swingAttack");
             yield return new WaitForSeconds(0.24f);
             SwingAttackHitClientRpc();
+            // In case the player has already gone away, we just yield break (basically same as return, but for IEnumerator)
+            if(currentBehaviourStateIndex != (int)TLBehavior.HeadSwingAttackInProgress){
+                yield break;
+            }
+            SwitchToBehaviourClientRpc((int)TLBehavior.StickingInFrontOfPlayer);
+        }
+
+        public override void OnCollideWithPlayer(Collider other)
+        {
+            if (timeSinceHittingLocalPlayer < 1f) {
+                return;
+            }
+            PlayerControllerB playerControllerB = MeetsStandardPlayerCollisionConditions(other);
+            if (playerControllerB != null)
+            {
+                myLogSource.LogInfo("Toilet Leech Collision with Player!");
+                timeSinceHittingLocalPlayer = 0f;
+                playerControllerB.DamagePlayer(20);
+            }
         }
 
         public override void HitEnemy(int force = 1, PlayerControllerB playerWhoHit = null, bool playHitSFX = false)
@@ -180,7 +205,7 @@ namespace ToiletLeechIsReal {
         public void SwingAttackHitClientRpc()
         {
             myLogSource.LogInfo("SwingAttackHitClientRPC");
-            int playerLayer = 1 << 3;
+            int playerLayer = 1 << 3; // This can be found from the game's Asset Ripper output in Unity
             Collider[] hitColliders = Physics.OverlapBox(attackArea.position, attackArea.localScale, Quaternion.identity, playerLayer);
             if(hitColliders.Length > 0){
                 foreach (var player in hitColliders){

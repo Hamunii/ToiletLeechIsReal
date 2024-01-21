@@ -821,7 +821,31 @@ MonoBehaviour:
   creatureSFX: {fileID: 7795299300801817655}
   eye: {fileID: 0}
   dieSFX: {fileID: 8300000, guid: 3bf9953d84767e76b833692580c82dbd, type: 3}
-  enemyBehaviourStates: []
+  enemyBehaviourStates:
+  - name: SearchingForPlayer
+    VoiceClip: {fileID: 0}
+    playOneShotVoice: 0
+    SFXClip: {fileID: 0}
+    playOneShotSFX: 0
+    IsAnimTrigger: 0
+    parameterString: 
+    boolValue: 0
+  - name: StickingInFrontOfPlayer
+    VoiceClip: {fileID: 0}
+    playOneShotVoice: 0
+    SFXClip: {fileID: 0}
+    playOneShotSFX: 0
+    IsAnimTrigger: 0
+    parameterString: 
+    boolValue: 0
+  - name: HeadSwingAttackInProgress
+    VoiceClip: {fileID: 0}
+    playOneShotVoice: 0
+    SFXClip: {fileID: 0}
+    playOneShotSFX: 0
+    IsAnimTrigger: 0
+    parameterString: 
+    boolValue: 0
   currentBehaviourState:
     name: 
     VoiceClip: {fileID: 0}
