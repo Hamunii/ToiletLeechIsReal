@@ -11,7 +11,7 @@ You can directly open the game's exe file, and this will allow you to open two i
 
 You can also use external mods to spawn the enemy for testing. I don't know one right now that works fine on v49. If you have any suggestions, feel free to open an issue or something. Alternatively, you could implement testing functionality in your mod directly.
 
-### Abstract Class EnemyAI
+### Introduction to Abstract Class EnemyAI
 
 Every enemy in Lethal Company inherits from the EnemyAI class, so we do the same.
 
@@ -28,8 +28,6 @@ if (!inSpecialAnimation)
 }
 ```
 This also means that if `syncMovementSpeed` is zero, or a very big number, the enemy movement will appear janky on clients other than the host.
-
-It also seems that the enemy will also point towards `targetYRotation`, but I just realised this now as I'm reading the code.
 
 The `DoAIInterval()` method runs in an interval we've set in Unity on our custom AI script which is attached to our enemy prefab. We have set this to 0.2 seconds, which is also used in the game by for example the BaboonHawk enemy and probably other enemies too.
 
@@ -50,6 +48,11 @@ public virtual void DoAIInterval()
 As we can see, the enemy updates its destination when `moveTowardsDestination` is True. It is True by default, and also gets set True if you run the `SetDestinationToPosition()` method, returning true, which means the enemy was able to pathfind to the player. Running that method also sets `movingTowardsTargetPlayer` to False, and updates the `destination` variable.
 
 The `OnCollideWithPlayer()` method will run when an object with a trigger collider and the Enemy AI Collision Detect (Script). This is also the collider we can hit with a shovel, and we need to implement `HitEnemy()` for our enemy to be able to take damage and die.
+
+### Enemy Movement Examples
+
+The `TargetClosestPlayer()` method can be used to make the enemy change its targetPlayer to the closest player.
+Then, we can for example do `SetDestinationToPosition(targetPlayer.transform.position)` to make our enemy pathfind to where targetPlayer stands.
 
 ### Using Random Without Desync
 
