@@ -5,7 +5,8 @@ You can open the Unity project included in this repository by choosing to open a
 ### Setting Up The Unity Project
 
 > [!NOTE]  
-> You must have git installed. Also, the [SETUP-PROJECT.py](/SETUP-PROJECT.py) script will copy all of the dlls files for you! So if you run it, you can ignore this section almost entirely.
+> You must have git installed for the AssetBundle Browser extension.  
+> Also, the [SETUP-PROJECT.py](/SETUP-PROJECT.py) script will copy all of the dlls files for you! So if you run it, you can ignore this section almost entirely.
 
 The Unity project we have is based off of Evaisa's [Lethal Company Unity Template](https://github.com/EvaisaDev/LethalCompanyUnityTemplate/) (hence the LICENSE file in that folder. I have no idea if I can remove it or not). HOWEVER, just like with our dlls in the root directory of this repository, we need to add some dll files into our `UnityProject/Assets/Plugins` folder. These are listed in the README of Evaisa's repository, but here's the list so you don't miss it:
 >- AmazingAssets.TerrainToMesh.dll
@@ -44,7 +45,7 @@ The dll file of this mod also needs to be there so we can reference ToiletLeechA
 
 ### Our Toilet Leech Assets In Unity
 
-> [!INFO]
+> [!NOTE]  
 > The way we figure out how enemies are configured in Unity is done by looking at the Asset Ripper's Unity project output of the game files. You can use [AssetRipper Guid Patcher](https://github.com/ChrisFeline/AssetRipperGuidPatcher) to get a Unity project based on the game files!
 
 We have made a ToiletLeech folder in our Unity project. Everything that goes into our asset bundle is in there.
@@ -59,7 +60,7 @@ The EnemyType ScriptableObject has some configuration options, and the most impo
 
 ### The Toilet Leech Prefab
 
-> [!INFO]
+> [!NOTE]
 > If you don't know what prefabs are, see https://docs.unity3d.com/Manual/Prefabs.html
 
 We have added these components to our prefab for everything to work properly:  
