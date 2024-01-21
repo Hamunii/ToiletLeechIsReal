@@ -66,7 +66,7 @@ We have added these components to our prefab for everything to work properly:
 ![Screenshot: Toilet Leech Prefab in inspector](./ForTutorial/ToiletLeechPrefabInspector.png)
 
 1. Toilet Leech AI (Script)
-    - This script can be found in `src/ToiletLeechAI.cs` at the root of this repository, and has been referenced from our build dll file in the Unity project so our prefab can recognize it as the same script. We have configuration options on Unity side that come from the `EnemyAI` class, as our AI class inherits from that.
+    - This script can be found in `Plugin/src/ToiletLeechAI.cs` at the root of this repository, and we have built our mod dll file and placed it inside `Assets/Plugins` in our Unity project so we can add it as a component to our prefab. We must do it that way because Asset Bundles cannot contain scripts, and by doing it this way, our mod's AI script will get recognized as the same script.
 2. Network Object
     - Needs to be added so our enemy's position can sync in multiplayer. After you reference your AI script, Unity will automatically prompt you to add this component.
 3. Nav Mesh Agent

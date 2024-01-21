@@ -22,14 +22,14 @@ After copying this repo for yourself, run [SETUP-PROJECT.py](/SETUP-PROJECT.py) 
     - [x] Animation
     - [x] How to export model for Unity
     - [ ] Common issues and how to fix them
-- [ ] Unity resources
+- [x] Unity resources
     - [x] What are asset bundles?
     - [x] How to add stuff to asset bundles
     - [x] Building asset bundles
     - [x] How Toilet Leech is configured
     - [x] Importing fbx models (your model from blender)
-    - [ ] What are prefabs
-    - [ ] Referencing our [AI script](src/ToiletLeechAI.cs) in a prefab
+    - [x] What are prefabs
+    - [x] Referencing our [AI script](Plugin/src/ToiletLeechAI.cs) in a prefab
 
 ### Mod Progress
 
