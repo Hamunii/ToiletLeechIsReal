@@ -36,8 +36,8 @@ namespace ToiletLeechIsReal {
         }
 
         public override void Start()
-		{
-			base.Start();
+        {
+            base.Start();
             myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech AI");
             myLogSource.LogInfo("Toilet Leech Spawned");
             timeSinceHittingLocalPlayer = 0;
@@ -49,7 +49,7 @@ namespace ToiletLeechIsReal {
             // NOTE: Add your behavior states in your enemy script in Unity, where you can configure fun stuff
             // like a voice clip or an sfx clip to play when changing to that specific behavior state.
             currentBehaviourStateIndex = (int)TLBehavior.SearchingForPlayer;
-		}
+        }
 
         public override void Update(){
             base.Update();
