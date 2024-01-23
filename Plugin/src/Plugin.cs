@@ -5,7 +5,6 @@ using HarmonyLib;
 using LethalLib.Modules;
 using static LethalLib.Modules.Levels;
 using static LethalLib.Modules.Enemies;
-using System;
 using BepInEx.Logging;
 
 namespace ToiletLeechIsReal {
