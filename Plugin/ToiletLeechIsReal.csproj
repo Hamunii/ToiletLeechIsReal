@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>ToiletLeechIsReal</AssemblyName>
     <Description>This revolutionary mod brings to life the unused toilet leech enemy which exists deep within the game files.</Description>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <Company>Hamunii</Company>

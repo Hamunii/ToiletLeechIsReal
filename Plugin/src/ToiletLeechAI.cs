@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using BepInEx.Logging;
 using GameNetcodeStuff;
 using Unity.Netcode;
 using UnityEngine;
@@ -26,7 +25,6 @@ namespace ToiletLeechIsReal {
         float timeSinceNewRandPos;
         Vector3 positionRandomness;
         Vector3 StalkPos;
-        private ManualLogSource myLogSource;
         System.Random enemyRandom;
         bool isDeadAnimationDone;
         enum TLBehavior {
@@ -35,11 +33,16 @@ namespace ToiletLeechIsReal {
             HeadSwingAttackInProgress,
         }
 
+        void LogIfDebugBuild(string text) {
+            #if DEBUG
+            ToiletLeechPlugin.Logger.LogInfo(text);
+            #endif
+        }
+
         public override void Start()
         {
             base.Start();
-            myLogSource = BepInEx.Logging.Logger.CreateLogSource("Toilet Leech AI");
-            myLogSource.LogInfo("Toilet Leech Spawned");
+            LogIfDebugBuild("Toilet Leech Spawned");
             timeSinceHittingLocalPlayer = 0;
             creatureAnimator.SetTrigger("startWalk");
             timeSinceNewRandPos = 0;
@@ -56,7 +59,7 @@ namespace ToiletLeechIsReal {
             if(isEnemyDead){
                 // For some weird reason I can't get an RPC to get called from HitEnemy() (works from other methods), so we do this workaround. We just want the enemy to stop playing the song.
                 if(!isDeadAnimationDone){ 
-                    myLogSource.LogInfo("Stopping enemy voice with janky code.");
+                    LogIfDebugBuild("Stopping enemy voice with janky code.");
                     isDeadAnimationDone = true;
                     creatureVoice.Stop();
                     creatureVoice.PlayOneShot(dieSFX);
@@ -97,7 +100,7 @@ namespace ToiletLeechIsReal {
                     // We don't care about doing anything here
                     break;
                 default:
-                    myLogSource.LogWarning("This Behavior State doesn't exist!");
+                    LogIfDebugBuild("This Behavior State doesn't exist!");
                     break;
             }
         }
@@ -107,7 +110,7 @@ namespace ToiletLeechIsReal {
             if (targetPlayer != null && Vector3.Distance(transform.position, targetPlayer.transform.position) <= range)
             {
                 if(routine.inProgress){
-                    myLogSource.LogInfo("Start Target Player");
+                    LogIfDebugBuild("Start Target Player");
                     StopSearch(routine);
                     SwitchToBehaviourClientRpc((int)TLBehavior.StickingInFrontOfPlayer);
                 }
@@ -115,7 +118,7 @@ namespace ToiletLeechIsReal {
             else
             {
                 if(!routine.inProgress){
-                    myLogSource.LogInfo("Stop Target Player");
+                    LogIfDebugBuild("Stop Target Player");
                     StartSearch(transform.position, routine);
                     SwitchToBehaviourClientRpc((int)TLBehavior.SearchingForPlayer);
                 }
@@ -170,7 +173,7 @@ namespace ToiletLeechIsReal {
             PlayerControllerB playerControllerB = MeetsStandardPlayerCollisionConditions(other);
             if (playerControllerB != null)
             {
-                myLogSource.LogInfo("Toilet Leech Collision with Player!");
+                LogIfDebugBuild("Toilet Leech Collision with Player!");
                 timeSinceHittingLocalPlayer = 0f;
                 playerControllerB.DamagePlayer(20);
             }
@@ -197,14 +200,14 @@ namespace ToiletLeechIsReal {
         [ClientRpc]
         public void DoAnimationClientRpc(string animationName)
         {
-            myLogSource.LogInfo($"Animation: {animationName}");
+            LogIfDebugBuild($"Animation: {animationName}");
             creatureAnimator.SetTrigger(animationName);
         }
 
         [ClientRpc]
         public void SwingAttackHitClientRpc()
         {
-            myLogSource.LogInfo("SwingAttackHitClientRPC");
+            LogIfDebugBuild("SwingAttackHitClientRPC");
             int playerLayer = 1 << 3; // This can be found from the game's Asset Ripper output in Unity
             Collider[] hitColliders = Physics.OverlapBox(attackArea.position, attackArea.localScale, Quaternion.identity, playerLayer);
             if(hitColliders.Length > 0){
@@ -212,7 +215,7 @@ namespace ToiletLeechIsReal {
                     PlayerControllerB playerControllerB = MeetsStandardPlayerCollisionConditions(player);
                     if (playerControllerB != null)
                     {
-                        myLogSource.LogInfo("Swing attack hit player!");
+                        LogIfDebugBuild("Swing attack hit player!");
                         timeSinceHittingLocalPlayer = 0f;
                         playerControllerB.DamagePlayer(40);
                     }

@@ -24,6 +24,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: leech-body
     second: {fileID: 2100000, guid: c4c6e28caeaf3028eaf2abce227ebc96, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: toilet
+    second: {fileID: 2100000, guid: 6d822949991dbdad49a5d6b46606a0e4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

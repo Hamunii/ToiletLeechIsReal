@@ -6,14 +6,17 @@ using LethalLib.Modules;
 using static LethalLib.Modules.Levels;
 using static LethalLib.Modules.Enemies;
 using System;
+using BepInEx.Logging;
 
 namespace ToiletLeechIsReal {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class ToiletLeechPlugin : BaseUnityPlugin {
         public static Harmony _harmony;
         public static EnemyType toiletLeech;
+        internal static new ManualLogSource Logger;
 
         private void Awake() {
+            Logger = base.Logger;
             Assets.PopulateAssets();
 
             toiletLeech = Assets.MainAssetBundle.LoadAsset<EnemyType>("ToiletLeech");

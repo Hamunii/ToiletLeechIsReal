@@ -3,12 +3,13 @@
 > [!TIP]  
 > Don't press random keys, as Blender has a lot of keyboard shortcuts and you might have no idea what you just did or how to undo it. That said, keyboard shortcuts can speed up your workflow by a lot, and you can use this [Blender Shortcuts Cheat Sheet](https://docs.google.com/document/d/1zPBgZAdftWa6WVa7UIFUqW_7EcqOYE0X743RqFuJL3o/edit?pli=1#heading=h.ftqi9ub1gec3) by Blender Guru, which can be useful.
 
-If you have absolutely no experience with Blender, the 4 first parts of this series will be relevant.  
+If you have absolutely no experience with Blender, the 5 first parts of this series will be relevant.  
 [Blender 4.0 Beginner Donut Tutorial](https://www.youtube.com/playlist?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) (playlist) - Blender Guru
 - [Part 1: Introduction](https://youtu.be/B0J27sf9N1Y?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Introduces the very basics of Blender
 - [Part 2: Basic Modeling](https://youtu.be/tBpnKTAc5Eo?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Self-explanatory (Learn to model a Donut)
 - [Part 3: Modeling the Icing](https://youtu.be/AqJx5TJyhes?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z&t=42) - introduces more advanced modeling techniques (Detailing)
 - [Part 4: Sculpting](https://youtu.be/--GVNZnSROc?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Sculpting can be especially useful when modeling organic things
+- [Part 5: Shading](https://youtu.be/fsLO1F5x7yM?list=PLjEaoINr3zgEPv5y--4MKpciLaoQYZB1Z) - Materials, texturing, UV unwrapping
 
 ### Modeling
 
@@ -74,5 +75,12 @@ This will open our FBX exporter window, where we have some options available to 
 
 Even I don't understand how any it really works, but our model points in the negative Z direction, and in the transfrom section, we have set `Forward` to `-Z Forward`, and `Up` to `Y Up` and our model appears correctly in Unity.  
 ![Screenshot: Export as FBX Settings](./ForTutorial/BlenderExportAsFBX.png)
+
+### Exporting an Updated Version of Your Model For Unity
+
+> [!WARNING]
+> Make sure to have a backup of your Unity project before doing this!
+
+If you have made changes to your model in Blender and want to bring the updated model into Unity, you will want to export your model again, overwriting the previous FBX file. Don't delete the previous version of the model or the accompanying .meta file, and don't overwrite the model inside of Unity. We want to keep all the references intact, and the best way to do that is to overwrite the FBX file from outside of Unity.
 
 **Pages: [Unity](./Unity.md) | [Coding AI](./CodingAI.md)**
