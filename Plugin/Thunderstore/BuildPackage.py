@@ -45,6 +45,7 @@ print(color.green + 'Making the zip package...')
 
 with ZipFile(releasePath, 'w') as zip_object:
    # Adding files that need to be zipped
+   zip_object.write(f'{os.path.join(os.path.join(thisPath, os.pardir), os.pardir)}/UnityProject/AssetBundles/StandaloneWindows/toiletleech', f'/toiletleech')
    zip_object.write(f'{os.path.join(thisPath, os.pardir)}/bin/Release/netstandard2.1/{metadata['name']}.dll', f'/{metadata['name']}.dll')
    zip_object.write(f'{thisPath}/icon.png', '/icon.png')
    zip_object.write(f'{thisPath}/README.md', '/README.md')

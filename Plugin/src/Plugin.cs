@@ -6,6 +6,7 @@ using LethalLib.Modules;
 using static LethalLib.Modules.Levels;
 using static LethalLib.Modules.Enemies;
 using BepInEx.Logging;
+using System.IO;
 
 namespace ToiletLeechIsReal {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
@@ -45,17 +46,15 @@ namespace ToiletLeechIsReal {
         }
     }
 
-    // credit to upsidedowncatfish for the asset loader class
     public static class Assets {
-        public static string mainAssetBundleName = "toiletleech";
         public static AssetBundle MainAssetBundle = null;
-
-        private static string GetAssemblyName() => Assembly.GetExecutingAssembly().FullName.Split(',')[0];
         public static void PopulateAssets() {
-            if(MainAssetBundle == null) {
-                using(var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(GetAssemblyName() + "." + mainAssetBundleName)) {
-                    MainAssetBundle = AssetBundle.LoadFromStream(assetStream);
-                }
+            string sAssemblyLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            MainAssetBundle = AssetBundle.LoadFromFile(Path.Combine(sAssemblyLocation, "toiletleech"));
+            if (MainAssetBundle == null) {
+                ToiletLeechPlugin.Logger.LogError("Failed to load custom assets.");
+                return;
             }
         }
     }

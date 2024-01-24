@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>ToiletLeechIsReal</AssemblyName>
     <Description>This revolutionary mod brings to life the unused toilet leech enemy which exists deep within the game files.</Description>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <Company>Hamunii</Company>
@@ -25,14 +25,6 @@
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
-
-	<ItemGroup>
-		<None Remove="toiletleech" />
-	</ItemGroup>
-	
-	<ItemGroup>
-		<EmbeddedResource Include="toiletleech" />
-	</ItemGroup>
 
   <ItemGroup>
     <Reference Include="UnityEngine"><HintPath>../dlls/UnityEngine.CoreModule.dll</HintPath></Reference>
