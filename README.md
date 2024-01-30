@@ -1,3 +1,7 @@
+# IMPORTANT!
+
+[LC-ExampleEnemy](https://github.com/Hamunii/LC-ExampleEnemy) is taking the place of ToiletLeechIsReal as the example enemy! Please use that project instead as the base/example for your enemy! The guide however does not exist in that repo, but is instead ported over for the Lethal Company Modding Wiki.
+
 # Toilet Leech Is Real
 
 > [!NOTE]  
