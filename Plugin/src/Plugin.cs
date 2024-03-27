@@ -21,6 +21,7 @@ namespace ToiletLeechIsReal {
         private void Awake() {
             Logger = base.Logger;
             Assets.PopulateAssets();
+            config = new ToiletLeechIsRealConfig(this.Config); // Create the config with the file from here.
 
             toiletLeech = Assets.MainAssetBundle.LoadAsset<EnemyType>("ToiletLeech");
             var tlTerminalNode = Assets.MainAssetBundle.LoadAsset<TerminalNode>("ToiletLeechTN");
